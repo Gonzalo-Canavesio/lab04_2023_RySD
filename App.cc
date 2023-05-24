@@ -11,6 +11,7 @@ class App: public cSimpleModule {
 private:
     cMessage *sendMsgEvent;
     cStdDev delayStats;
+    cStdDev hopStats;
     cOutVector delayVector;
 public:
     App();
@@ -49,11 +50,12 @@ void App::finish() {
     // Record statistics
     recordScalar("Average delay", delayStats.getMean());
     recordScalar("Number of packets", delayStats.getCount());
+    recordScalar("hopCount", hopStats.getMean());
 }
 
 void App::handleMessage(cMessage *msg) {
 
-    // if msg is a sendMsgEvent, create and send new packet
+    // Esto se ejecuta cuando la app genera un mensaje y tiene que mandarlo a la capa de red
     if (msg == sendMsgEvent) {
         // create new packet
         Packet *pkt = new Packet("packet",this->getParentModule()->getIndex());
@@ -69,11 +71,13 @@ void App::handleMessage(cMessage *msg) {
         scheduleAt(departureTime, sendMsgEvent);
 
     }
-    // else, msg is a packet from net layer
+    // Esto se ejecuta cuando se llega al nodo destino
     else {
         // compute delay and record statistics
         simtime_t delay = simTime() - msg->getCreationTime();
+        Packet *pkt = (Packet *) msg;
         delayStats.collect(delay);
+        hopStats.collect(pkt->getHopCount());
         delayVector.record(delay);
         // delete msg
         delete (msg);

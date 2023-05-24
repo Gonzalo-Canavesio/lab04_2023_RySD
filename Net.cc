@@ -42,13 +42,13 @@ void Net::handleMessage(cMessage *msg) {
 
     // If this node is the final destination, send to App
     if (pkt->getDestination() == this->getParentModule()->getIndex()) {
-        send(msg, "toApp$o");
+        send(pkt, "toApp$o");
     }
-    // If not, forward the packet to some else... to who?
+    // If not, forward the packet
     else {
         // We send to link interface #0, which is the
         // one connected to the clockwise side of the ring
-        // Is this the best choice? are there others?
-        send(msg, "toLnk$o", 0);
+        pkt->setHopCount(pkt->getHopCount()+1);
+        send(pkt, "toLnk$o", 0);
     }
 }
