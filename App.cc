@@ -13,6 +13,8 @@ private:
     cStdDev delayStats;
     cStdDev hopStats;
     cOutVector delayVector;
+    int packetsSent;
+    int packetsReceived;
 public:
     App();
     virtual ~App();
@@ -44,6 +46,8 @@ void App::initialize() {
     // Initialize statistics
     delayStats.setName("TotalDelay");
     delayVector.setName("Delay");
+    packetsSent = 0;
+    packetsReceived = 0;
 }
 
 void App::finish() {
@@ -51,6 +55,9 @@ void App::finish() {
     recordScalar("Average delay", delayStats.getMean());
     recordScalar("Number of packets", delayStats.getCount());
     recordScalar("hopCount", hopStats.getMean());
+    recordScalar("sentPackets", packetsSent);
+    recordScalar("receivedPackets", packetsReceived);
+
 }
 
 void App::handleMessage(cMessage *msg) {
@@ -69,7 +76,7 @@ void App::handleMessage(cMessage *msg) {
         // compute the new departure time and schedule next sendMsgEvent
         simtime_t departureTime = simTime() + par("interArrivalTime");
         scheduleAt(departureTime, sendMsgEvent);
-
+        packetsSent++;
     }
     // Esto se ejecuta cuando se llega al nodo destino
     else {
@@ -81,6 +88,7 @@ void App::handleMessage(cMessage *msg) {
         delayVector.record(delay);
         // delete msg
         delete (msg);
+        packetsReceived++;
     }
 
 }
