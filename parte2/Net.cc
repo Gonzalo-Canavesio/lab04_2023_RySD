@@ -82,7 +82,7 @@ void Net::handleMessage(cMessage *msg) {
         pkt->setDestination(0);
         pkt->setHopCount(0);
         pkt->setKind(5);
-        pkt->setAmountNeighbours(numNeighborsKnown);
+        pkt->setNeighboursArraySize(numNeighborsKnown);
         for(int i = 0; i < numNeighborsKnown; i++) {
             pkt->setNeighbours(i, graph[this->getParentModule()->getIndex()][i]);
         }
@@ -119,7 +119,7 @@ void Net::handleMessage(cMessage *msg) {
             pkt->setDestination(0);
             pkt->setHopCount(0);
             pkt->setKind(5);
-            pkt->setAmountNeighbours(numNeighborsKnown);
+            pkt->setNeighboursArraySize(numNeighborsKnown);
             for(int i = 0; i < numNeighborsKnown; i++) {
                 pkt->setNeighbours(i, graph[this->getParentModule()->getIndex()][i]);
             }
@@ -141,7 +141,7 @@ void Net::handleMessage(cMessage *msg) {
             infoReceived[pkt->getSource()] = true;
             
             // Add the info to the graph
-            for(int i = 0; i < pkt->getAmountNeighbours(); i++) {
+            for(int i = 0; i < pkt->getNeighboursArraySize(); i++) {
                 graph[pkt->getSource()].push_back(pkt->getNeighbours(i));
                 if(pkt->getNeighbours(i) != this->getParentModule()->getIndex()){
                     neighbors[pkt->getNeighbours(i)] = pkt->getArrivalGate()->getIndex();
