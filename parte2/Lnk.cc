@@ -50,9 +50,13 @@ void Lnk::handleMessage(cMessage *msg) {
             Packet* pkt = (Packet*) buffer.pop();
             bufferSizeVector.record(buffer.getLength());
             // send
-            send(pkt, "toOut$o");
-            serviceTime = pkt->getDuration();
-            scheduleAt(simTime() + serviceTime, endServiceEvent);
+            if (gate("toOut$o")->getNextGate()->isConnectedOutside()) {
+                send(pkt, "toOut$o");
+                serviceTime = pkt->getDuration();
+                scheduleAt(simTime() + serviceTime, endServiceEvent);
+            } else {
+                delete pkt;
+            }
         }
     } else { // msg is a packet
         if (msg->arrivedOn("toNet$i")) {

@@ -26,6 +26,7 @@ private:
     int numInterfaces;
     std::map<int, int> neighbors;
     int numNeighborsKnown;
+    bool infoSent;
 
 public:
     Net();
@@ -49,7 +50,7 @@ Net::~Net() {
 void Net::initialize() {
     ready = false;
     numInterfaces = gateSize("toLnk");
-    
+    infoSent = false;
     numNeighborsKnown = 0;
     for(int i = 0; i < numInterfaces; i++) {
         // I send Hello messages to all my neighbors
@@ -71,6 +72,25 @@ void Net::handleMessage(cMessage *msg) {
     // All msg (events) on net are packets
     Packet *pkt = (Packet *) msg;
 
+    // Este harcodeo solo es necesario para el caso de la networkStar debido al "bug" de que algunas interfaces no estan implementadas
+    // Sin esto y un par de cambios más en el código, al ejecutar la networkStar genera errores por las gates que no estan implementadas en la red
+    if(!infoSent && simTime() >= SimTime(300, SIMTIME_US)){
+        infoSent = true;
+        // Send packet to neighbors resuming the network
+        Packet *pkt = new Packet("Info");
+        pkt->setSource(this->getParentModule()->getIndex());
+        pkt->setDestination(0);
+        pkt->setHopCount(0);
+        pkt->setKind(5);
+        pkt->setAmountNeighbours(numNeighborsKnown);
+        for(int i = 0; i < numNeighborsKnown; i++) {
+            pkt->setNeighbours(i, graph[this->getParentModule()->getIndex()][i]);
+        }
+        for(int i = 0; i < numInterfaces; i++) {
+            send(pkt->dup(), "toLnk$o", i);
+        }
+    }
+
     // If the packet is a Hello message, answer with a HelloAck
     if (pkt->getKind() == 3) {
         Packet *pktAck = new Packet("HelloAck");
@@ -91,15 +111,16 @@ void Net::handleMessage(cMessage *msg) {
         infoReceived[pkt->getSource()] = false;
 
         // If I know all my neighbors, I'm ready to send the info to all packets
-        if(numNeighborsKnown == numInterfaces) {
+        if(numNeighborsKnown == numInterfaces) { 
+            infoSent = true;
             // Send packet to neighbors resuming the network
             Packet *pkt = new Packet("Info");
             pkt->setSource(this->getParentModule()->getIndex());
             pkt->setDestination(0);
             pkt->setHopCount(0);
             pkt->setKind(5);
-            pkt->setAmountNeighbours(numInterfaces);
-            for(int i = 0; i < numInterfaces; i++) {
+            pkt->setAmountNeighbours(numNeighborsKnown);
+            for(int i = 0; i < numNeighborsKnown; i++) {
                 pkt->setNeighbours(i, graph[this->getParentModule()->getIndex()][i]);
             }
             for(int i = 0; i < numInterfaces; i++) {
