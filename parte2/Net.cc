@@ -16,17 +16,21 @@ using namespace omnetpp;
 
 class Net: public cSimpleModule {
 private:
-    // Routing table is a map of destination and what interface to use
+    // Tabla de ruteo
     std::map<int, int> routingTable;
     // Graph 
     std::vector<int> graph[MAXN];
     // Info received
     std::map<int, bool> infoReceived;
+    // Estoy listo para enviar y recibir paquetes
     bool ready;
+    // Número de interfaces que tiene el módulo
     int numInterfaces;
-    std::map<int, int> neighbors;
+    // Número de vecinos conocidos
     int numNeighborsKnown;
-    bool infoSent;
+    // Tabla de vecinos y cual es la interfaz que me lleva a ellos
+    std::map<int, int> neighbors;
+
 
 public:
     Net();
@@ -48,20 +52,26 @@ Net::~Net() {
 }
 
 void Net::initialize() {
-    ready = false;
-    numInterfaces = gateSize("toLnk");
-    infoSent = false;
-    numNeighborsKnown = 0;
-    for(int i = 0; i < numInterfaces; i++) {
-        // I send Hello messages to all my neighbors
-        Packet *pkt = new Packet("Hello");
-        pkt->setSource(this->getParentModule()->getIndex());
-        pkt->setDestination(0);
-        pkt->setHopCount(0);
-        pkt->setKind(3);
-        send(pkt, "toLnk$o", i);
-    }
+    ready = false; // No estoy listo para enviar o recibir paquetes
+    int numPosiblesInterfaces = gateSize("toLnk"); // Obtengo el número de interfaces que tiene el módulo
+    numInterfaces = 0; // Inicializo el número de interfaces realmente validas en 0
+    numNeighborsKnown = 0; // Inicializo el número de vecinos conocidos en 0
 
+    // Creo el paquete de Hello para enviarlo a todos mis vecinos
+    Packet *pkt = new Packet("Hello");
+    pkt->setSource(this->getParentModule()->getIndex()); // Establezco el origen como mi número de nodo
+    pkt->setDestination(0); // Establezco el destino en 0 ya que no conozco el indice de mis vecinos
+    pkt->setHopCount(0); 
+    pkt->setKind(3); // Establezco el tipo de mensaje como Hello (3)
+
+    // Envío el paquete de Hello por todas las interfaces
+    for(int i = 0; i < numPosiblesInterfaces; i++) {
+        // Verifico que la interfaz este conectada a un nodo/sea valida
+        if(getParentModule()->getSubmodule("lnk",i)->gate("toOut$o")->getNextGate()->isConnectedOutside()) {
+            numInterfaces++;
+            send(pkt->dup(), "toLnk$o", i);
+        }
+    }        
 }
 
 void Net::finish() {
@@ -69,105 +79,101 @@ void Net::finish() {
 
 void Net::handleMessage(cMessage *msg) {
 
-    // All msg (events) on net are packets
     Packet *pkt = (Packet *) msg;
 
-    // Este harcodeo solo es necesario para el caso de la networkStar debido al "bug" de que algunas interfaces no estan implementadas
-    // Sin esto y un par de cambios más en el código, al ejecutar la networkStar genera errores por las gates que no estan implementadas en la red
-    if(!infoSent && simTime() >= SimTime(300, SIMTIME_US)){
-        infoSent = true;
-        // Send packet to neighbors resuming the network
-        Packet *pkt = new Packet("Info");
-        pkt->setSource(this->getParentModule()->getIndex());
-        pkt->setDestination(0);
-        pkt->setHopCount(0);
-        pkt->setKind(5);
-        pkt->setNeighboursArraySize(numNeighborsKnown);
-        for(int i = 0; i < numNeighborsKnown; i++) {
-            pkt->setNeighbours(i, graph[this->getParentModule()->getIndex()][i]);
-        }
-        for(int i = 0; i < numInterfaces; i++) {
-            send(pkt->dup(), "toLnk$o", i);
-        }
-    }
-
-    // If the packet is a Hello message, answer with a HelloAck
+    // Si el paquete es un Hello respondo con un HelloAck
     if (pkt->getKind() == 3) {
-        Packet *pktAck = new Packet("HelloAck");
-        pktAck->setSource(this->getParentModule()->getIndex());
-        pktAck->setDestination(pkt->getSource());
-        pktAck->setHopCount(0);
-        pktAck->setKind(4);
-        send(pktAck, "toLnk$o", pkt->getArrivalGate()->getIndex());
-        delete (pkt);
-        return;
 
+        // Creo el paquete de respuesta
+        Packet *pktAck = new Packet("HelloAck");
+        pktAck->setSource(this->getParentModule()->getIndex()); // Establezco el origen como mi número de nodo
+        pktAck->setDestination(pkt->getSource()); // Establezco el destino como el nodo que me envió el mensaje Hello
+        pktAck->setHopCount(0); 
+        pktAck->setKind(4); // Establezco el tipo de mensaje como HelloAck (4)
+
+        // Envío el paquete de respuesta por la misma interfaz que me llegó el mensaje Hello
+        send(pktAck, "toLnk$o", pkt->getArrivalGate()->getIndex());
+
+        delete (pkt);
+
+    // Si el paquete es un HelloAck
     } else if(pkt->getKind() == 4) {
-        // If the packet is a HelloAck
+        
+        // Incremento el número de vecinos conocidos
         numNeighborsKnown++;
-        // Add the neighbor to the graph
+        // Agrego el vecino a mi grafo
         graph[this->getParentModule()->getIndex()].push_back(pkt->getSource());
+
+        // Establezco cual es la interfaz que me lleva a ese vecino
         neighbors[pkt->getSource()] = pkt->getArrivalGate()->getIndex();
+
+        // Agrego el vecino a la lista de nodos que me falta recibir el paquete "Info"
         infoReceived[pkt->getSource()] = false;
 
-        // If I know all my neighbors, I'm ready to send the info to all packets
+        // Si ya recibí todos los paquetes "HelloAck" de todos mis vecinos envío el paquete "Info" usando inundación
         if(numNeighborsKnown == numInterfaces) { 
-            infoSent = true;
-            // Send packet to neighbors resuming the network
+            // Creo el paquete de Info
             Packet *pkt = new Packet("Info");
             pkt->setSource(this->getParentModule()->getIndex());
-            pkt->setDestination(0);
+            pkt->setDestination(0); // Establezco el destino en 0 ya que el paquete usará inundación así que no importa
             pkt->setHopCount(0);
-            pkt->setKind(5);
-            pkt->setNeighboursArraySize(numNeighborsKnown);
+            pkt->setKind(5); // Establezco el tipo de mensaje como Info (5)
+            pkt->setNeighboursArraySize(numNeighborsKnown); // Establezcó el tamaño del arreglo de vecinos del paquete
+            
+            // Agrego todos mis vecinos al paquete
             for(int i = 0; i < numNeighborsKnown; i++) {
                 pkt->setNeighbours(i, graph[this->getParentModule()->getIndex()][i]);
             }
-            for(int i = 0; i < numInterfaces; i++) {
-                send(pkt->dup(), "toLnk$o", i);
+            
+            // Envío el paquete por todas las interfaces
+            for(int i = 0; i < numNeighborsKnown; i++) {
+                send(pkt->dup(), "toLnk$o", neighbors[graph[this->getParentModule()->getIndex()][i]]);
             }
         }
-        delete (pkt);
-        return;
 
+        delete (pkt);
+
+    // Si el paquete es un Info
     } else if(pkt->getKind() == 5) {
-        // If the packet is a Info
-        // If I already received the info, ignore
+        // Si ya recibí el paquete de ese nodo lo ignoro
         if(infoReceived[pkt->getSource()]) {
+            
             delete (pkt);
-            return;
+
         } else {
-            // If not, add the info to the routing table
+            // Si no recibí info de ese nodo ahora marco como que ya la recibí
             infoReceived[pkt->getSource()] = true;
             
-            // Add the info to the graph
+            // Agrego la información de los vecinos 
             for(int i = 0; i < pkt->getNeighboursArraySize(); i++) {
+                // Agrego el vecino del nodo a mi grafo
                 graph[pkt->getSource()].push_back(pkt->getNeighbours(i));
-                if(pkt->getNeighbours(i) != this->getParentModule()->getIndex()){
-                    neighbors[pkt->getNeighbours(i)] = pkt->getArrivalGate()->getIndex();
-                }
-                infoReceived.insert(std::make_pair(pkt->getNeighbours(i), false));
+
+                // Agrego el vecino a la lista de nodos que me falta recibir el paquete "Info" si no lo había recibido antes
+                infoReceived.insert(std::make_pair(pkt->getNeighbours(i), false)); 
             }
 
-            // Re-send the packet to all neighbors
             pkt->setHopCount(pkt->getHopCount()+1);
+
+            // Reenvio el paquete por todas las interfaces excepto por la que me llegó
             for(int i = 0; i < numInterfaces; i++) {
-                if(i != pkt->getArrivalGate()->getIndex()){
-                    send(pkt->dup(), "toLnk$o", i);
+                if(neighbors[graph[this->getParentModule()->getIndex()][i]] != pkt->getArrivalGate()->getIndex()){
+                    send(pkt->dup(), "toLnk$o", neighbors[graph[this->getParentModule()->getIndex()][i]]);
                 }
             }
 
             delete (pkt);
 
-            // If I received all the info, I'm ready to send packets
+            // Si ya recibí todos los paquetes "Info" de todos mis vecinos entonces estoy listo para enviar paquetes de datos
             for(int i = 0; i < infoReceived.size(); i++) {
+                // Si hay un nodo del cual no recibí info (y no soy yo) entonces no estoy listo
                 if(!infoReceived[i] && i != this->getParentModule()->getIndex()) {
                     return;
                 }
             }
             ready = true;
 
-            // Run BFS to find the shortest path to all nodes
+            // Ejecuto BFS para calcular distancias mínimas desde mi nodo a todos los demás
             queue<int> q;
             bool visited[MAXN];
             int dist[MAXN];
@@ -193,7 +199,7 @@ void Net::handleMessage(cMessage *msg) {
                 }
             }
 
-            // Add the shortest path to the routing table
+            // Calculo la tabla de ruteo
             for(int i = 0; i < MAXN; i++) {
                 if(dist[i] != 0) {
                     int next = i;
@@ -203,14 +209,15 @@ void Net::handleMessage(cMessage *msg) {
                     routingTable[i] = neighbors[next];
                 }
             }
-            // Print the routing table
+
+            // DEBUG: Imprimo la tabla de ruteo
             for(int i = 0; i < MAXN; i++) {
                 if(routingTable.count(i) != 0) {
                     EV << "Node " << this->getParentModule()->getIndex() << " to " << i << " through " << routingTable[i] << endl;
                 }
             }
 
-            // Print the graph
+            // DEBUG: Imprimo el grafo
             for(int i = 0; i < MAXN; i++) {
                 if(graph[i].size() != 0) {
                     EV << "Node " << i << " has neighbors: ";
@@ -222,14 +229,12 @@ void Net::handleMessage(cMessage *msg) {
             }
             
         }
-
-        return;
-    } else {
-        // If this node is the final destination, send to App
+    } else if(ready){
+        // Si el paquete es para mí lo envío a la aplicación
         if (pkt->getDestination() == this->getParentModule()->getIndex()) {
             send(pkt, "toApp$o");
         }
-        // If not, forward the packet
+        // Si el paquete no es para mí lo reenvío por la interfaz correspondiente
         else {
             pkt->setHopCount(pkt->getHopCount()+1);
             send(pkt, "toLnk$o", routingTable[pkt->getDestination()]);
