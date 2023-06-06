@@ -39,14 +39,8 @@ def draw_carga(data, index, rindex):
     ]
     print(carga)
     arriv_times = data.get_inter_arrival_times()
-    plt.plot(arriv_times, carga, linewidth=0.5 + rindex*2, zorder=index,
+    plt.plot(arriv_times, carga, linewidth=1 + rindex*1.5, zorder=index,
              label=f"{data.file_path.split('.json')[0]}")
-
-
-def draw_cargas(sources):
-    plt.xlabel("interArrivalTime")
-    plt.ylabel("Received/Sent")
-    draw_with_func(sources, draw_carga)
 
 
 def draw_with_func(sources, draw_func):
@@ -62,8 +56,11 @@ def main():
     plt.style.use("ggplot")
     sources = [
         "p1c2.json",
+        "p2c2.json",
     ]
     source_length = len(sources)
+    plt.xlabel("interArrivalTime")
+    plt.ylabel("Recibidos/Enviados")
     for index, source in enumerate(sources):
         data = DfWrapperCarga(source)
         draw_carga(data, index, source_length - index)
