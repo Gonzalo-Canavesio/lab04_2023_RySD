@@ -38,19 +38,18 @@ class DfWrapper:
                     result.append(field['value'])
         return result
 
-
-def get_delays(data):
-    return data.get_val_from_col("scalars", "avgDelay")
-
-
-def get_gen_intervals(data):
-    interval_strings = data.get_val_from_col(
-        "parameters", "generationInterval")
-    return [float(interval.split("(")[-1][:-1]) for interval in interval_strings]
+    def get_val_from_col_and_module(self, col, module, key):
+        result = ""
+        for row in self.data[col]:
+            for field in row:
+                if field['module'] == module and field['name'] == key:
+                    result = field['value']
+        return result
 
 
 def draw_delay(data, index, rindex):
-    delay = data.get_val_from_col("scalars", "Network.node[5].app")
+    delay = data.get_val_from_col_and_module(
+        "scalars", "Network.node[5].app", "Average delay")
     print(delay)
     plt.bar(index, delay, label=f"{data.file_path.split('.json')[0]}")
 
