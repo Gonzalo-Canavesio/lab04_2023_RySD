@@ -1,0 +1,1352 @@
+{
+    "General-0-20230607-00:01:39-378" : {
+        "attributes" : {
+            "configname" : "General",
+            "datetime" : "20230607-00:01:39",
+            "datetimef" : "20230607-000139",
+            "experiment" : "General",
+            "inifile" : "omnetpp.ini",
+            "iterationvars" : "",
+            "iterationvarsd" : "",
+            "iterationvarsf" : "",
+            "measurement" : "",
+            "network" : "Network",
+            "processid" : "378",
+            "repetition" : "0",
+            "replication" : "#0",
+            "resultdir" : "results",
+            "runnumber" : "0",
+            "seedset" : "0"
+        },
+        "itervars" : {
+        },
+        "config" : [
+            { "network" : "Network" },
+            { "sim-time-limit" : "200s" },
+            { "Network.node[{0, 2}].app.interArrivalTime" : "exponential(1)" },
+            { "Network.node[{0, 2}].app.packetByteSize" : "125000" },
+            { "Network.node[{0, 2}].app.destination" : "5" }
+        ],
+        "scalars" : [
+            {
+                "module" : "Network.node[0].app",
+                "name" : "Average delay",
+                "value" : null
+            },
+            {
+                "module" : "Network.node[0].app",
+                "name" : "Number of packets",
+                "value" : 0
+            },
+            {
+                "module" : "Network.node[0].app",
+                "name" : "hopCount",
+                "value" : null
+            },
+            {
+                "module" : "Network.node[0].app",
+                "name" : "sentPackets",
+                "value" : 201
+            },
+            {
+                "module" : "Network.node[0].app",
+                "name" : "receivedPackets",
+                "value" : 0
+            },
+            {
+                "module" : "Network.node[1].app",
+                "name" : "Average delay",
+                "value" : null
+            },
+            {
+                "module" : "Network.node[1].app",
+                "name" : "Number of packets",
+                "value" : 0
+            },
+            {
+                "module" : "Network.node[1].app",
+                "name" : "hopCount",
+                "value" : null
+            },
+            {
+                "module" : "Network.node[1].app",
+                "name" : "sentPackets",
+                "value" : 0
+            },
+            {
+                "module" : "Network.node[1].app",
+                "name" : "receivedPackets",
+                "value" : 0
+            },
+            {
+                "module" : "Network.node[2].app",
+                "name" : "Average delay",
+                "value" : null
+            },
+            {
+                "module" : "Network.node[2].app",
+                "name" : "Number of packets",
+                "value" : 0
+            },
+            {
+                "module" : "Network.node[2].app",
+                "name" : "hopCount",
+                "value" : null
+            },
+            {
+                "module" : "Network.node[2].app",
+                "name" : "sentPackets",
+                "value" : 189
+            },
+            {
+                "module" : "Network.node[2].app",
+                "name" : "receivedPackets",
+                "value" : 0
+            },
+            {
+                "module" : "Network.node[3].app",
+                "name" : "Average delay",
+                "value" : null
+            },
+            {
+                "module" : "Network.node[3].app",
+                "name" : "Number of packets",
+                "value" : 0
+            },
+            {
+                "module" : "Network.node[3].app",
+                "name" : "hopCount",
+                "value" : null
+            },
+            {
+                "module" : "Network.node[3].app",
+                "name" : "sentPackets",
+                "value" : 0
+            },
+            {
+                "module" : "Network.node[3].app",
+                "name" : "receivedPackets",
+                "value" : 0
+            },
+            {
+                "module" : "Network.node[4].app",
+                "name" : "Average delay",
+                "value" : null
+            },
+            {
+                "module" : "Network.node[4].app",
+                "name" : "Number of packets",
+                "value" : 0
+            },
+            {
+                "module" : "Network.node[4].app",
+                "name" : "hopCount",
+                "value" : null
+            },
+            {
+                "module" : "Network.node[4].app",
+                "name" : "sentPackets",
+                "value" : 0
+            },
+            {
+                "module" : "Network.node[4].app",
+                "name" : "receivedPackets",
+                "value" : 0
+            },
+            {
+                "module" : "Network.node[5].app",
+                "name" : "Average delay",
+                "value" : 6.9039952697103
+            },
+            {
+                "module" : "Network.node[5].app",
+                "name" : "Number of packets",
+                "value" : 379
+            },
+            {
+                "module" : "Network.node[5].app",
+                "name" : "hopCount",
+                "value" : 3
+            },
+            {
+                "module" : "Network.node[5].app",
+                "name" : "sentPackets",
+                "value" : 0
+            },
+            {
+                "module" : "Network.node[5].app",
+                "name" : "receivedPackets",
+                "value" : 379
+            },
+            {
+                "module" : "Network.node[6].app",
+                "name" : "Average delay",
+                "value" : null
+            },
+            {
+                "module" : "Network.node[6].app",
+                "name" : "Number of packets",
+                "value" : 0
+            },
+            {
+                "module" : "Network.node[6].app",
+                "name" : "hopCount",
+                "value" : null
+            },
+            {
+                "module" : "Network.node[6].app",
+                "name" : "sentPackets",
+                "value" : 0
+            },
+            {
+                "module" : "Network.node[6].app",
+                "name" : "receivedPackets",
+                "value" : 0
+            },
+            {
+                "module" : "Network.node[7].app",
+                "name" : "Average delay",
+                "value" : null
+            },
+            {
+                "module" : "Network.node[7].app",
+                "name" : "Number of packets",
+                "value" : 0
+            },
+            {
+                "module" : "Network.node[7].app",
+                "name" : "hopCount",
+                "value" : null
+            },
+            {
+                "module" : "Network.node[7].app",
+                "name" : "sentPackets",
+                "value" : 0
+            },
+            {
+                "module" : "Network.node[7].app",
+                "name" : "receivedPackets",
+                "value" : 0
+            }
+        ],
+        "parameters" : [
+            {
+                "module" : "Network.node[0].toNod$o[1].channel",
+                "name" : "typename",
+                "value" : "\"ned.DatarateChannel\""
+            },
+            {
+                "module" : "Network.node[0].toNod$o[1].channel",
+                "name" : "disabled",
+                "value" : "false",
+                "attributes" : {
+                    "mutable" : ""
+                }
+            },
+            {
+                "module" : "Network.node[0].toNod$o[1].channel",
+                "name" : "delay",
+                "value" : "0.0001s",
+                "attributes" : {
+                    "mutable" : "",
+                    "unit" : "s"
+                }
+            },
+            {
+                "module" : "Network.node[0].toNod$o[1].channel",
+                "name" : "datarate",
+                "value" : "1e+06bps",
+                "attributes" : {
+                    "mutable" : "",
+                    "unit" : "bps"
+                }
+            },
+            {
+                "module" : "Network.node[0].toNod$o[1].channel",
+                "name" : "ber",
+                "value" : "0",
+                "attributes" : {
+                    "mutable" : ""
+                }
+            },
+            {
+                "module" : "Network.node[0].toNod$o[1].channel",
+                "name" : "per",
+                "value" : "0",
+                "attributes" : {
+                    "mutable" : ""
+                }
+            },
+            {
+                "module" : "Network.node[1].toNod$o[0].channel",
+                "name" : "typename",
+                "value" : "\"ned.DatarateChannel\""
+            },
+            {
+                "module" : "Network.node[1].toNod$o[0].channel",
+                "name" : "disabled",
+                "value" : "false",
+                "attributes" : {
+                    "mutable" : ""
+                }
+            },
+            {
+                "module" : "Network.node[1].toNod$o[0].channel",
+                "name" : "delay",
+                "value" : "0.0001s",
+                "attributes" : {
+                    "mutable" : "",
+                    "unit" : "s"
+                }
+            },
+            {
+                "module" : "Network.node[1].toNod$o[0].channel",
+                "name" : "datarate",
+                "value" : "1e+06bps",
+                "attributes" : {
+                    "mutable" : "",
+                    "unit" : "bps"
+                }
+            },
+            {
+                "module" : "Network.node[1].toNod$o[0].channel",
+                "name" : "ber",
+                "value" : "0",
+                "attributes" : {
+                    "mutable" : ""
+                }
+            },
+            {
+                "module" : "Network.node[1].toNod$o[0].channel",
+                "name" : "per",
+                "value" : "0",
+                "attributes" : {
+                    "mutable" : ""
+                }
+            },
+            {
+                "module" : "Network.node[1].toNod$o[1].channel",
+                "name" : "typename",
+                "value" : "\"ned.DatarateChannel\""
+            },
+            {
+                "module" : "Network.node[1].toNod$o[1].channel",
+                "name" : "disabled",
+                "value" : "false",
+                "attributes" : {
+                    "mutable" : ""
+                }
+            },
+            {
+                "module" : "Network.node[1].toNod$o[1].channel",
+                "name" : "delay",
+                "value" : "0.0001s",
+                "attributes" : {
+                    "mutable" : "",
+                    "unit" : "s"
+                }
+            },
+            {
+                "module" : "Network.node[1].toNod$o[1].channel",
+                "name" : "datarate",
+                "value" : "1e+06bps",
+                "attributes" : {
+                    "mutable" : "",
+                    "unit" : "bps"
+                }
+            },
+            {
+                "module" : "Network.node[1].toNod$o[1].channel",
+                "name" : "ber",
+                "value" : "0",
+                "attributes" : {
+                    "mutable" : ""
+                }
+            },
+            {
+                "module" : "Network.node[1].toNod$o[1].channel",
+                "name" : "per",
+                "value" : "0",
+                "attributes" : {
+                    "mutable" : ""
+                }
+            },
+            {
+                "module" : "Network.node[2].toNod$o[0].channel",
+                "name" : "typename",
+                "value" : "\"ned.DatarateChannel\""
+            },
+            {
+                "module" : "Network.node[2].toNod$o[0].channel",
+                "name" : "disabled",
+                "value" : "false",
+                "attributes" : {
+                    "mutable" : ""
+                }
+            },
+            {
+                "module" : "Network.node[2].toNod$o[0].channel",
+                "name" : "delay",
+                "value" : "0.0001s",
+                "attributes" : {
+                    "mutable" : "",
+                    "unit" : "s"
+                }
+            },
+            {
+                "module" : "Network.node[2].toNod$o[0].channel",
+                "name" : "datarate",
+                "value" : "1e+06bps",
+                "attributes" : {
+                    "mutable" : "",
+                    "unit" : "bps"
+                }
+            },
+            {
+                "module" : "Network.node[2].toNod$o[0].channel",
+                "name" : "ber",
+                "value" : "0",
+                "attributes" : {
+                    "mutable" : ""
+                }
+            },
+            {
+                "module" : "Network.node[2].toNod$o[0].channel",
+                "name" : "per",
+                "value" : "0",
+                "attributes" : {
+                    "mutable" : ""
+                }
+            },
+            {
+                "module" : "Network.node[2].toNod$o[1].channel",
+                "name" : "typename",
+                "value" : "\"ned.DatarateChannel\""
+            },
+            {
+                "module" : "Network.node[2].toNod$o[1].channel",
+                "name" : "disabled",
+                "value" : "false",
+                "attributes" : {
+                    "mutable" : ""
+                }
+            },
+            {
+                "module" : "Network.node[2].toNod$o[1].channel",
+                "name" : "delay",
+                "value" : "0.0001s",
+                "attributes" : {
+                    "mutable" : "",
+                    "unit" : "s"
+                }
+            },
+            {
+                "module" : "Network.node[2].toNod$o[1].channel",
+                "name" : "datarate",
+                "value" : "1e+06bps",
+                "attributes" : {
+                    "mutable" : "",
+                    "unit" : "bps"
+                }
+            },
+            {
+                "module" : "Network.node[2].toNod$o[1].channel",
+                "name" : "ber",
+                "value" : "0",
+                "attributes" : {
+                    "mutable" : ""
+                }
+            },
+            {
+                "module" : "Network.node[2].toNod$o[1].channel",
+                "name" : "per",
+                "value" : "0",
+                "attributes" : {
+                    "mutable" : ""
+                }
+            },
+            {
+                "module" : "Network.node[3].toNod$o[0].channel",
+                "name" : "typename",
+                "value" : "\"ned.DatarateChannel\""
+            },
+            {
+                "module" : "Network.node[3].toNod$o[0].channel",
+                "name" : "disabled",
+                "value" : "false",
+                "attributes" : {
+                    "mutable" : ""
+                }
+            },
+            {
+                "module" : "Network.node[3].toNod$o[0].channel",
+                "name" : "delay",
+                "value" : "0.0001s",
+                "attributes" : {
+                    "mutable" : "",
+                    "unit" : "s"
+                }
+            },
+            {
+                "module" : "Network.node[3].toNod$o[0].channel",
+                "name" : "datarate",
+                "value" : "1e+06bps",
+                "attributes" : {
+                    "mutable" : "",
+                    "unit" : "bps"
+                }
+            },
+            {
+                "module" : "Network.node[3].toNod$o[0].channel",
+                "name" : "ber",
+                "value" : "0",
+                "attributes" : {
+                    "mutable" : ""
+                }
+            },
+            {
+                "module" : "Network.node[3].toNod$o[0].channel",
+                "name" : "per",
+                "value" : "0",
+                "attributes" : {
+                    "mutable" : ""
+                }
+            },
+            {
+                "module" : "Network.node[3].toNod$o[1].channel",
+                "name" : "typename",
+                "value" : "\"ned.DatarateChannel\""
+            },
+            {
+                "module" : "Network.node[3].toNod$o[1].channel",
+                "name" : "disabled",
+                "value" : "false",
+                "attributes" : {
+                    "mutable" : ""
+                }
+            },
+            {
+                "module" : "Network.node[3].toNod$o[1].channel",
+                "name" : "delay",
+                "value" : "0.0001s",
+                "attributes" : {
+                    "mutable" : "",
+                    "unit" : "s"
+                }
+            },
+            {
+                "module" : "Network.node[3].toNod$o[1].channel",
+                "name" : "datarate",
+                "value" : "1e+06bps",
+                "attributes" : {
+                    "mutable" : "",
+                    "unit" : "bps"
+                }
+            },
+            {
+                "module" : "Network.node[3].toNod$o[1].channel",
+                "name" : "ber",
+                "value" : "0",
+                "attributes" : {
+                    "mutable" : ""
+                }
+            },
+            {
+                "module" : "Network.node[3].toNod$o[1].channel",
+                "name" : "per",
+                "value" : "0",
+                "attributes" : {
+                    "mutable" : ""
+                }
+            },
+            {
+                "module" : "Network.node[4].toNod$o[0].channel",
+                "name" : "typename",
+                "value" : "\"ned.DatarateChannel\""
+            },
+            {
+                "module" : "Network.node[4].toNod$o[0].channel",
+                "name" : "disabled",
+                "value" : "false",
+                "attributes" : {
+                    "mutable" : ""
+                }
+            },
+            {
+                "module" : "Network.node[4].toNod$o[0].channel",
+                "name" : "delay",
+                "value" : "0.0001s",
+                "attributes" : {
+                    "mutable" : "",
+                    "unit" : "s"
+                }
+            },
+            {
+                "module" : "Network.node[4].toNod$o[0].channel",
+                "name" : "datarate",
+                "value" : "1e+06bps",
+                "attributes" : {
+                    "mutable" : "",
+                    "unit" : "bps"
+                }
+            },
+            {
+                "module" : "Network.node[4].toNod$o[0].channel",
+                "name" : "ber",
+                "value" : "0",
+                "attributes" : {
+                    "mutable" : ""
+                }
+            },
+            {
+                "module" : "Network.node[4].toNod$o[0].channel",
+                "name" : "per",
+                "value" : "0",
+                "attributes" : {
+                    "mutable" : ""
+                }
+            },
+            {
+                "module" : "Network.node[4].toNod$o[1].channel",
+                "name" : "typename",
+                "value" : "\"ned.DatarateChannel\""
+            },
+            {
+                "module" : "Network.node[4].toNod$o[1].channel",
+                "name" : "disabled",
+                "value" : "false",
+                "attributes" : {
+                    "mutable" : ""
+                }
+            },
+            {
+                "module" : "Network.node[4].toNod$o[1].channel",
+                "name" : "delay",
+                "value" : "0.0001s",
+                "attributes" : {
+                    "mutable" : "",
+                    "unit" : "s"
+                }
+            },
+            {
+                "module" : "Network.node[4].toNod$o[1].channel",
+                "name" : "datarate",
+                "value" : "1e+06bps",
+                "attributes" : {
+                    "mutable" : "",
+                    "unit" : "bps"
+                }
+            },
+            {
+                "module" : "Network.node[4].toNod$o[1].channel",
+                "name" : "ber",
+                "value" : "0",
+                "attributes" : {
+                    "mutable" : ""
+                }
+            },
+            {
+                "module" : "Network.node[4].toNod$o[1].channel",
+                "name" : "per",
+                "value" : "0",
+                "attributes" : {
+                    "mutable" : ""
+                }
+            },
+            {
+                "module" : "Network.node[5].toNod$o[0].channel",
+                "name" : "typename",
+                "value" : "\"ned.DatarateChannel\""
+            },
+            {
+                "module" : "Network.node[5].toNod$o[0].channel",
+                "name" : "disabled",
+                "value" : "false",
+                "attributes" : {
+                    "mutable" : ""
+                }
+            },
+            {
+                "module" : "Network.node[5].toNod$o[0].channel",
+                "name" : "delay",
+                "value" : "0.0001s",
+                "attributes" : {
+                    "mutable" : "",
+                    "unit" : "s"
+                }
+            },
+            {
+                "module" : "Network.node[5].toNod$o[0].channel",
+                "name" : "datarate",
+                "value" : "1e+06bps",
+                "attributes" : {
+                    "mutable" : "",
+                    "unit" : "bps"
+                }
+            },
+            {
+                "module" : "Network.node[5].toNod$o[0].channel",
+                "name" : "ber",
+                "value" : "0",
+                "attributes" : {
+                    "mutable" : ""
+                }
+            },
+            {
+                "module" : "Network.node[5].toNod$o[0].channel",
+                "name" : "per",
+                "value" : "0",
+                "attributes" : {
+                    "mutable" : ""
+                }
+            },
+            {
+                "module" : "Network.node[5].toNod$o[1].channel",
+                "name" : "typename",
+                "value" : "\"ned.DatarateChannel\""
+            },
+            {
+                "module" : "Network.node[5].toNod$o[1].channel",
+                "name" : "disabled",
+                "value" : "false",
+                "attributes" : {
+                    "mutable" : ""
+                }
+            },
+            {
+                "module" : "Network.node[5].toNod$o[1].channel",
+                "name" : "delay",
+                "value" : "0.0001s",
+                "attributes" : {
+                    "mutable" : "",
+                    "unit" : "s"
+                }
+            },
+            {
+                "module" : "Network.node[5].toNod$o[1].channel",
+                "name" : "datarate",
+                "value" : "1e+06bps",
+                "attributes" : {
+                    "mutable" : "",
+                    "unit" : "bps"
+                }
+            },
+            {
+                "module" : "Network.node[5].toNod$o[1].channel",
+                "name" : "ber",
+                "value" : "0",
+                "attributes" : {
+                    "mutable" : ""
+                }
+            },
+            {
+                "module" : "Network.node[5].toNod$o[1].channel",
+                "name" : "per",
+                "value" : "0",
+                "attributes" : {
+                    "mutable" : ""
+                }
+            },
+            {
+                "module" : "Network.node[6].toNod$o[0].channel",
+                "name" : "typename",
+                "value" : "\"ned.DatarateChannel\""
+            },
+            {
+                "module" : "Network.node[6].toNod$o[0].channel",
+                "name" : "disabled",
+                "value" : "false",
+                "attributes" : {
+                    "mutable" : ""
+                }
+            },
+            {
+                "module" : "Network.node[6].toNod$o[0].channel",
+                "name" : "delay",
+                "value" : "0.0001s",
+                "attributes" : {
+                    "mutable" : "",
+                    "unit" : "s"
+                }
+            },
+            {
+                "module" : "Network.node[6].toNod$o[0].channel",
+                "name" : "datarate",
+                "value" : "1e+06bps",
+                "attributes" : {
+                    "mutable" : "",
+                    "unit" : "bps"
+                }
+            },
+            {
+                "module" : "Network.node[6].toNod$o[0].channel",
+                "name" : "ber",
+                "value" : "0",
+                "attributes" : {
+                    "mutable" : ""
+                }
+            },
+            {
+                "module" : "Network.node[6].toNod$o[0].channel",
+                "name" : "per",
+                "value" : "0",
+                "attributes" : {
+                    "mutable" : ""
+                }
+            },
+            {
+                "module" : "Network.node[6].toNod$o[1].channel",
+                "name" : "typename",
+                "value" : "\"ned.DatarateChannel\""
+            },
+            {
+                "module" : "Network.node[6].toNod$o[1].channel",
+                "name" : "disabled",
+                "value" : "false",
+                "attributes" : {
+                    "mutable" : ""
+                }
+            },
+            {
+                "module" : "Network.node[6].toNod$o[1].channel",
+                "name" : "delay",
+                "value" : "0.0001s",
+                "attributes" : {
+                    "mutable" : "",
+                    "unit" : "s"
+                }
+            },
+            {
+                "module" : "Network.node[6].toNod$o[1].channel",
+                "name" : "datarate",
+                "value" : "1e+06bps",
+                "attributes" : {
+                    "mutable" : "",
+                    "unit" : "bps"
+                }
+            },
+            {
+                "module" : "Network.node[6].toNod$o[1].channel",
+                "name" : "ber",
+                "value" : "0",
+                "attributes" : {
+                    "mutable" : ""
+                }
+            },
+            {
+                "module" : "Network.node[6].toNod$o[1].channel",
+                "name" : "per",
+                "value" : "0",
+                "attributes" : {
+                    "mutable" : ""
+                }
+            },
+            {
+                "module" : "Network.node[7].toNod$o[0].channel",
+                "name" : "typename",
+                "value" : "\"ned.DatarateChannel\""
+            },
+            {
+                "module" : "Network.node[7].toNod$o[0].channel",
+                "name" : "disabled",
+                "value" : "false",
+                "attributes" : {
+                    "mutable" : ""
+                }
+            },
+            {
+                "module" : "Network.node[7].toNod$o[0].channel",
+                "name" : "delay",
+                "value" : "0.0001s",
+                "attributes" : {
+                    "mutable" : "",
+                    "unit" : "s"
+                }
+            },
+            {
+                "module" : "Network.node[7].toNod$o[0].channel",
+                "name" : "datarate",
+                "value" : "1e+06bps",
+                "attributes" : {
+                    "mutable" : "",
+                    "unit" : "bps"
+                }
+            },
+            {
+                "module" : "Network.node[7].toNod$o[0].channel",
+                "name" : "ber",
+                "value" : "0",
+                "attributes" : {
+                    "mutable" : ""
+                }
+            },
+            {
+                "module" : "Network.node[7].toNod$o[0].channel",
+                "name" : "per",
+                "value" : "0",
+                "attributes" : {
+                    "mutable" : ""
+                }
+            },
+            {
+                "module" : "Network.node[7].toNod$o[1].channel",
+                "name" : "typename",
+                "value" : "\"ned.DatarateChannel\""
+            },
+            {
+                "module" : "Network.node[7].toNod$o[1].channel",
+                "name" : "disabled",
+                "value" : "false",
+                "attributes" : {
+                    "mutable" : ""
+                }
+            },
+            {
+                "module" : "Network.node[7].toNod$o[1].channel",
+                "name" : "delay",
+                "value" : "0.0001s",
+                "attributes" : {
+                    "mutable" : "",
+                    "unit" : "s"
+                }
+            },
+            {
+                "module" : "Network.node[7].toNod$o[1].channel",
+                "name" : "datarate",
+                "value" : "1e+06bps",
+                "attributes" : {
+                    "mutable" : "",
+                    "unit" : "bps"
+                }
+            },
+            {
+                "module" : "Network.node[7].toNod$o[1].channel",
+                "name" : "ber",
+                "value" : "0",
+                "attributes" : {
+                    "mutable" : ""
+                }
+            },
+            {
+                "module" : "Network.node[7].toNod$o[1].channel",
+                "name" : "per",
+                "value" : "0",
+                "attributes" : {
+                    "mutable" : ""
+                }
+            },
+            {
+                "module" : "Network.node[0].toNod$o[0].channel",
+                "name" : "typename",
+                "value" : "\"ned.DatarateChannel\""
+            },
+            {
+                "module" : "Network.node[0].toNod$o[0].channel",
+                "name" : "disabled",
+                "value" : "false",
+                "attributes" : {
+                    "mutable" : ""
+                }
+            },
+            {
+                "module" : "Network.node[0].toNod$o[0].channel",
+                "name" : "delay",
+                "value" : "0.0001s",
+                "attributes" : {
+                    "mutable" : "",
+                    "unit" : "s"
+                }
+            },
+            {
+                "module" : "Network.node[0].toNod$o[0].channel",
+                "name" : "datarate",
+                "value" : "1e+06bps",
+                "attributes" : {
+                    "mutable" : "",
+                    "unit" : "bps"
+                }
+            },
+            {
+                "module" : "Network.node[0].toNod$o[0].channel",
+                "name" : "ber",
+                "value" : "0",
+                "attributes" : {
+                    "mutable" : ""
+                }
+            },
+            {
+                "module" : "Network.node[0].toNod$o[0].channel",
+                "name" : "per",
+                "value" : "0",
+                "attributes" : {
+                    "mutable" : ""
+                }
+            },
+            {
+                "module" : "Network.node[0].app",
+                "name" : "typename",
+                "value" : "\"App\""
+            },
+            {
+                "module" : "Network.node[0].app",
+                "name" : "interArrivalTime",
+                "value" : "exponential(1)"
+            },
+            {
+                "module" : "Network.node[0].app",
+                "name" : "packetByteSize",
+                "value" : "125000"
+            },
+            {
+                "module" : "Network.node[0].app",
+                "name" : "destination",
+                "value" : "5"
+            },
+            {
+                "module" : "Network.node[0].net",
+                "name" : "typename",
+                "value" : "\"Net\""
+            },
+            {
+                "module" : "Network.node[0].lnk[0]",
+                "name" : "typename",
+                "value" : "\"Lnk\""
+            },
+            {
+                "module" : "Network.node[0].lnk[1]",
+                "name" : "typename",
+                "value" : "\"Lnk\""
+            },
+            {
+                "module" : "Network.node[0]",
+                "name" : "typename",
+                "value" : "\"Node\""
+            },
+            {
+                "module" : "Network.node[0]",
+                "name" : "interfaces",
+                "value" : "2"
+            },
+            {
+                "module" : "Network.node[1].app",
+                "name" : "typename",
+                "value" : "\"App\""
+            },
+            {
+                "module" : "Network.node[1].app",
+                "name" : "interArrivalTime",
+                "value" : "0"
+            },
+            {
+                "module" : "Network.node[1].app",
+                "name" : "packetByteSize",
+                "value" : "125"
+            },
+            {
+                "module" : "Network.node[1].app",
+                "name" : "destination",
+                "value" : "0"
+            },
+            {
+                "module" : "Network.node[1].net",
+                "name" : "typename",
+                "value" : "\"Net\""
+            },
+            {
+                "module" : "Network.node[1].lnk[0]",
+                "name" : "typename",
+                "value" : "\"Lnk\""
+            },
+            {
+                "module" : "Network.node[1].lnk[1]",
+                "name" : "typename",
+                "value" : "\"Lnk\""
+            },
+            {
+                "module" : "Network.node[1]",
+                "name" : "typename",
+                "value" : "\"Node\""
+            },
+            {
+                "module" : "Network.node[1]",
+                "name" : "interfaces",
+                "value" : "2"
+            },
+            {
+                "module" : "Network.node[2].app",
+                "name" : "typename",
+                "value" : "\"App\""
+            },
+            {
+                "module" : "Network.node[2].app",
+                "name" : "interArrivalTime",
+                "value" : "exponential(1)"
+            },
+            {
+                "module" : "Network.node[2].app",
+                "name" : "packetByteSize",
+                "value" : "125000"
+            },
+            {
+                "module" : "Network.node[2].app",
+                "name" : "destination",
+                "value" : "5"
+            },
+            {
+                "module" : "Network.node[2].net",
+                "name" : "typename",
+                "value" : "\"Net\""
+            },
+            {
+                "module" : "Network.node[2].lnk[0]",
+                "name" : "typename",
+                "value" : "\"Lnk\""
+            },
+            {
+                "module" : "Network.node[2].lnk[1]",
+                "name" : "typename",
+                "value" : "\"Lnk\""
+            },
+            {
+                "module" : "Network.node[2]",
+                "name" : "typename",
+                "value" : "\"Node\""
+            },
+            {
+                "module" : "Network.node[2]",
+                "name" : "interfaces",
+                "value" : "2"
+            },
+            {
+                "module" : "Network.node[3].app",
+                "name" : "typename",
+                "value" : "\"App\""
+            },
+            {
+                "module" : "Network.node[3].app",
+                "name" : "interArrivalTime",
+                "value" : "0"
+            },
+            {
+                "module" : "Network.node[3].app",
+                "name" : "packetByteSize",
+                "value" : "125"
+            },
+            {
+                "module" : "Network.node[3].app",
+                "name" : "destination",
+                "value" : "0"
+            },
+            {
+                "module" : "Network.node[3].net",
+                "name" : "typename",
+                "value" : "\"Net\""
+            },
+            {
+                "module" : "Network.node[3].lnk[0]",
+                "name" : "typename",
+                "value" : "\"Lnk\""
+            },
+            {
+                "module" : "Network.node[3].lnk[1]",
+                "name" : "typename",
+                "value" : "\"Lnk\""
+            },
+            {
+                "module" : "Network.node[3]",
+                "name" : "typename",
+                "value" : "\"Node\""
+            },
+            {
+                "module" : "Network.node[3]",
+                "name" : "interfaces",
+                "value" : "2"
+            },
+            {
+                "module" : "Network.node[4].app",
+                "name" : "typename",
+                "value" : "\"App\""
+            },
+            {
+                "module" : "Network.node[4].app",
+                "name" : "interArrivalTime",
+                "value" : "0"
+            },
+            {
+                "module" : "Network.node[4].app",
+                "name" : "packetByteSize",
+                "value" : "125"
+            },
+            {
+                "module" : "Network.node[4].app",
+                "name" : "destination",
+                "value" : "0"
+            },
+            {
+                "module" : "Network.node[4].net",
+                "name" : "typename",
+                "value" : "\"Net\""
+            },
+            {
+                "module" : "Network.node[4].lnk[0]",
+                "name" : "typename",
+                "value" : "\"Lnk\""
+            },
+            {
+                "module" : "Network.node[4].lnk[1]",
+                "name" : "typename",
+                "value" : "\"Lnk\""
+            },
+            {
+                "module" : "Network.node[4]",
+                "name" : "typename",
+                "value" : "\"Node\""
+            },
+            {
+                "module" : "Network.node[4]",
+                "name" : "interfaces",
+                "value" : "2"
+            },
+            {
+                "module" : "Network.node[5].app",
+                "name" : "typename",
+                "value" : "\"App\""
+            },
+            {
+                "module" : "Network.node[5].app",
+                "name" : "interArrivalTime",
+                "value" : "0"
+            },
+            {
+                "module" : "Network.node[5].app",
+                "name" : "packetByteSize",
+                "value" : "125"
+            },
+            {
+                "module" : "Network.node[5].app",
+                "name" : "destination",
+                "value" : "0"
+            },
+            {
+                "module" : "Network.node[5].net",
+                "name" : "typename",
+                "value" : "\"Net\""
+            },
+            {
+                "module" : "Network.node[5].lnk[0]",
+                "name" : "typename",
+                "value" : "\"Lnk\""
+            },
+            {
+                "module" : "Network.node[5].lnk[1]",
+                "name" : "typename",
+                "value" : "\"Lnk\""
+            },
+            {
+                "module" : "Network.node[5]",
+                "name" : "typename",
+                "value" : "\"Node\""
+            },
+            {
+                "module" : "Network.node[5]",
+                "name" : "interfaces",
+                "value" : "2"
+            },
+            {
+                "module" : "Network.node[6].app",
+                "name" : "typename",
+                "value" : "\"App\""
+            },
+            {
+                "module" : "Network.node[6].app",
+                "name" : "interArrivalTime",
+                "value" : "0"
+            },
+            {
+                "module" : "Network.node[6].app",
+                "name" : "packetByteSize",
+                "value" : "125"
+            },
+            {
+                "module" : "Network.node[6].app",
+                "name" : "destination",
+                "value" : "0"
+            },
+            {
+                "module" : "Network.node[6].net",
+                "name" : "typename",
+                "value" : "\"Net\""
+            },
+            {
+                "module" : "Network.node[6].lnk[0]",
+                "name" : "typename",
+                "value" : "\"Lnk\""
+            },
+            {
+                "module" : "Network.node[6].lnk[1]",
+                "name" : "typename",
+                "value" : "\"Lnk\""
+            },
+            {
+                "module" : "Network.node[6]",
+                "name" : "typename",
+                "value" : "\"Node\""
+            },
+            {
+                "module" : "Network.node[6]",
+                "name" : "interfaces",
+                "value" : "2"
+            },
+            {
+                "module" : "Network.node[7].app",
+                "name" : "typename",
+                "value" : "\"App\""
+            },
+            {
+                "module" : "Network.node[7].app",
+                "name" : "interArrivalTime",
+                "value" : "0"
+            },
+            {
+                "module" : "Network.node[7].app",
+                "name" : "packetByteSize",
+                "value" : "125"
+            },
+            {
+                "module" : "Network.node[7].app",
+                "name" : "destination",
+                "value" : "0"
+            },
+            {
+                "module" : "Network.node[7].net",
+                "name" : "typename",
+                "value" : "\"Net\""
+            },
+            {
+                "module" : "Network.node[7].lnk[0]",
+                "name" : "typename",
+                "value" : "\"Lnk\""
+            },
+            {
+                "module" : "Network.node[7].lnk[1]",
+                "name" : "typename",
+                "value" : "\"Lnk\""
+            },
+            {
+                "module" : "Network.node[7]",
+                "name" : "typename",
+                "value" : "\"Node\""
+            },
+            {
+                "module" : "Network.node[7]",
+                "name" : "interfaces",
+                "value" : "2"
+            },
+            {
+                "module" : "Network",
+                "name" : "typename",
+                "value" : "\"Network\""
+            }
+        ]
+    }
+}
