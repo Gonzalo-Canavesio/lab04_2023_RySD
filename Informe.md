@@ -55,9 +55,9 @@ También se tuvo que modificar la estructura del paquete para integrar un campo 
 
 En el primer caso de prueba, hay dos nodos fuente, Nodo 0 y Nodo 2, y un nodo receptor, Nodo 5. Si nos fijamos en la estructura de la red, podemos notar que la mejor ruta que puede tomar el Nodo 0 es en sentido de las agujas del reloj, mientras que para el Nodo 2 es en sentido contrario a las agujas del reloj.
 
-|Demora|Buffer|
-|------|------|
-|![Caso1Demora](imgs/p1c1-delay.png)|![Caso1Buffer](imgs/p1c1-buffers-.png)|
+|Demora| Buffer                                 |
+|------|----------------------------------------|
+|![Caso1Demora](imgs/p1c1-delay.png)| ![Caso1Buffer](imgs/p1c1-buffers-.png) |
 
 Como primer punto podemos observar que la demora en con esta estructura cada vez es mayor. Inicialmente, esto ocurre porque en la configuración proporcionada no se elige la ruta óptima para enviar los paquetes desde el Nodo 2 hasta el Nodo 5. Además, se produce un problema adicional en un tramo de la ruta, donde se envían paquetes tanto desde el Nodo 0 como desde el Nodo 2, lo que genera un mayor retraso debido a que se supera la capacidad de esos enlaces para manejar tantos paquetes.
 
@@ -68,11 +68,25 @@ Para los buffer, se puede ver que se genera un fenomeno por causa de esto. El no
 
 #### Caso 2
 
+En esta configuración, el Nodo 5 permanecerá como el único receptor en la red, mientras que todos los demás nodos actuarán como emisores.
+
+| Demora                                             |
+|----------------------------------------------------|
+| ![Caso2Demora](imgs/p1c2-delay.png)                |
+
+| Buffer                                             |
+|----------------------------------------------------|
+| ![Caso2buffer01](imgs/p1c2-all_buffers.png)        |
+| ![Caso2buffer02](imgs/p1c2-buffers_first_half.png) |
+| ![Caso2buffer03](imgs/p1c2-buffers_second_half.png)|
+
+
 [INSERTAR RESULTADOS Y ANALISIS, CHAMUYO O COMPARACION DE ESOS RESULTADOS]
 
 
 #### Conclusiones
 
+El algoritmo utilizado es muy básico y no aprovecha eficientemente la estructura de la red. En lugar de utilizar ambas direcciones de la red, solo utiliza una de ellas, lo que desperdicia recursos y capacidad de transmisión. Además, en muchas ocasiones, el algoritmo elige la ruta más larga posible para llegar a un nodo, en lugar de optar por una ruta más corta y directa.
 
 ## Métodos
 
@@ -136,6 +150,15 @@ Finalmente, si se recibe un paquete de tipo Data y `ready` es true, se envia el 
 [INSERTAR RESULTADOS Y ANALISIS, CHAMUYO O COMPARACION DE ESOS RESULTADOS]
 
 ## Discusión
+
+Con esto pudimos entender el funcionamiento de una red, como lograr un enrutamiento y control de la misma. Ademas de como resolver problemas sobre el tema y buscar una solucion efectiva para la misma.  
+
+Apartir de la estructura dada nos pudimos dar cuenta que el algoritmo utilizado es muy básico y no aprovecha eficientemente la estructura de la red. En lugar de utilizar ambas direcciones de la red, solo utiliza una de ellas, lo que desperdicia recursos y capacidad de transmisión. Además, en muchas ocasiones, el algoritmo elige la ruta más larga posible para llegar a un nodo, en lugar de optar por una ruta más corta y directa.
+
+El algoritmo que implementamos aprovecha mas la estructura dela red de anillo, haciendo que cada nodo tenga un conocimiento acerca de sus vecinos evaluando la forma mas corta, concreta y simple de poder enviar un paquete hacia el nodo destino, favoreciento el rendimiendo de la misma estructura.
+
+Para llegar a una funcianamiento correcto de nuestro algortimo tuvimos que vernos "obligados" a la realizacion de una gran cantidad de iteraciones y sobre todo de correcciones. Ademas encontramos que fue un desafío determinar qué interfaces (link) del nodo estaban conectadas con el exterior y cuáles no. Nos llevó mucho tiempo y esfuerzo realizar una búsqueda exhaustiva y probar diversas configuraciones hasta encontrar la solución que funcionaba correctamente.
+
 
 [Una sección con las limitaciones durante la ejecución del proyecto, problemas y posibles mejoras de los algoritmos propuestos. Ademas puede ir una mini colclusion de lo que se aprendio durante el proyecto]
 
