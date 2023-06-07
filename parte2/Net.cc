@@ -66,7 +66,7 @@ void Net::initialize() {
 
     // Envio el paquete de Hello por todas las interfaces
     for(int i = 0; i < numPosiblesInterfaces; i++) {
-        // Verifico que la interfaz este conectada a un nodo/sea valida
+        // Verifico que la interfaz este conectada a un nodo/sea valida (Caso contrario me da error la simulacion)
         if(getParentModule()->getSubmodule("lnk",i)->gate("toOut$o")->getNextGate()->isConnectedOutside()) {
             numInterfaces++;
             send(pkt->dup(), "toLnk$o", i);
@@ -209,9 +209,11 @@ void Net::handleMessage(cMessage *msg) {
             for(int i = 0; i < MAXN; i++) {
                 if(dist[i] != 0) {
                     int next = i;
+                    // Busco cual de mis nodos vecinos es el siguiente en el camino hacia el nodo i
                     while(dist[next] != 1) {
                         next = parent[next];
                     }
+                    // Agrego a la tabla de ruteo la interfaz que me lleva al vecino que me lleva al nodo i
                     routingTable[i] = neighbors[next];
                 }
             }
