@@ -153,8 +153,6 @@ Finalmente, si se recibe un paquete de tipo Data y `ready` es true, se envia el 
 
 Con esto pudimos entender el funcionamiento de una red, como lograr un enrutamiento y control de la misma. Ademas de como resolver problemas sobre el tema y buscar una solucion efectiva para la misma.  
 
-Apartir de la estructura dada nos pudimos dar cuenta que el algoritmo utilizado es muy básico y no aprovecha eficientemente la estructura de la red. En lugar de utilizar ambas direcciones de la red, solo utiliza una de ellas, lo que desperdicia recursos y capacidad de transmisión. Además, en muchas ocasiones, el algoritmo elige la ruta más larga posible para llegar a un nodo, en lugar de optar por una ruta más corta y directa.
-
 El algoritmo que implementamos aprovecha mas la estructura dela red de anillo, haciendo que cada nodo tenga un conocimiento acerca de sus vecinos evaluando la forma mas corta, concreta y simple de poder enviar un paquete hacia el nodo destino, favoreciento el rendimiendo de la misma estructura.
 
 Para llegar a una funcianamiento correcto de nuestro algortimo tuvimos que vernos "obligados" a la realizacion de una gran cantidad de iteraciones y sobre todo de correcciones. Ademas encontramos que fue un desafío determinar qué interfaces (link) del nodo estaban conectadas con el exterior y cuáles no. Nos llevó mucho tiempo y esfuerzo realizar una búsqueda exhaustiva y probar diversas configuraciones hasta encontrar la solución que funcionaba correctamente.
