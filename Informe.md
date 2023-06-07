@@ -53,6 +53,16 @@ También se tuvo que modificar la estructura del paquete para integrar un campo 
 
 #### Caso 1
 
+En el primer caso de prueba, hay dos nodos fuente, Nodo 0 y Nodo 2, y un nodo receptor, Nodo 5. Si nos fijamos en la estructura de la red, podemos notar que la mejor ruta que puede tomar el Nodo 0 es en sentido de las agujas del reloj, mientras que para el Nodo 2 es en sentido contrario a las agujas del reloj.
+
+|Demora|Buffer|
+|------|------|
+|![Caso1Demora](imgs/p1c1-delay.png)|![Caso1Buffer](imgs/p1c1-buffers-.png)|
+
+Como primer punto podemos observar que la demora en con esta estructura cada vez es mayor. Inicialmente, esto ocurre porque en la configuración proporcionada no se elige la ruta óptima para enviar los paquetes desde el Nodo 2 hasta el Nodo 5. Además, se produce un problema adicional en un tramo de la ruta, donde se envían paquetes tanto desde el Nodo 0 como desde el Nodo 2, lo que genera un mayor retraso debido a que se supera la capacidad de esos enlaces para manejar tantos paquetes.
+
+Para los buffer, se puede ver que se genera un fenomeno por causa de esto. El nodo 0 genera paquetes que estan listos para ser enviado pero, tambien se usa la misma ruta para enviar nodos desde el nodo 2. A causa de lo anterior, el enlace que conecta el nodo 0 con el nodo 1 no maneje esta ola de paquetes proveniente del nodo 0, y esto provoca que se acumulen en el buffer del nodo 0 
+
 [INSERTAR RESULTADOS Y ANALISIS, CHAMUYO O COMPARACION DE ESOS RESULTADOS]
 
 
