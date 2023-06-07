@@ -1,9 +1,9 @@
 {
-    "General-0-20230606-23:59:23-377" : {
+    "General-0-20230607-22:16:19-139" : {
         "attributes" : {
             "configname" : "General",
-            "datetime" : "20230606-23:59:23",
-            "datetimef" : "20230606-235923",
+            "datetime" : "20230607-22:16:19",
+            "datetimef" : "20230607-221619",
             "experiment" : "General",
             "inifile" : "omnetpp.ini",
             "iterationvars" : "",
@@ -11,7 +11,7 @@
             "iterationvarsf" : "",
             "measurement" : "",
             "network" : "Network",
-            "processid" : "377",
+            "processid" : "139",
             "repetition" : "0",
             "replication" : "#0",
             "resultdir" : "results",
@@ -23,7 +23,7 @@
         "config" : [
             { "network" : "Network" },
             { "sim-time-limit" : "200s" },
-            { "Network.node[{0,1,2,3,4,6,7}].app.interArrivalTime" : "exponential(4)" },
+            { "Network.node[{0,1,2,3,4,6,7}].app.interArrivalTime" : "exponential(8)" },
             { "Network.node[{0,1,2,3,4,6,7}].app.packetByteSize" : "125000" },
             { "Network.node[{0,1,2,3,4,6,7}].app.destination" : "5" }
         ],
@@ -46,7 +46,7 @@
             {
                 "module" : "Network.node[0].app",
                 "name" : "sentPackets",
-                "value" : 43
+                "value" : 21
             },
             {
                 "module" : "Network.node[0].app",
@@ -71,7 +71,7 @@
             {
                 "module" : "Network.node[1].app",
                 "name" : "sentPackets",
-                "value" : 51
+                "value" : 21
             },
             {
                 "module" : "Network.node[1].app",
@@ -96,7 +96,7 @@
             {
                 "module" : "Network.node[2].app",
                 "name" : "sentPackets",
-                "value" : 56
+                "value" : 27
             },
             {
                 "module" : "Network.node[2].app",
@@ -121,7 +121,7 @@
             {
                 "module" : "Network.node[3].app",
                 "name" : "sentPackets",
-                "value" : 59
+                "value" : 25
             },
             {
                 "module" : "Network.node[3].app",
@@ -146,7 +146,7 @@
             {
                 "module" : "Network.node[4].app",
                 "name" : "sentPackets",
-                "value" : 49
+                "value" : 32
             },
             {
                 "module" : "Network.node[4].app",
@@ -156,17 +156,17 @@
             {
                 "module" : "Network.node[5].app",
                 "name" : "Average delay",
-                "value" : 4.6940782279486
+                "value" : 2.5818910453805
             },
             {
                 "module" : "Network.node[5].app",
                 "name" : "Number of packets",
-                "value" : 333
+                "value" : 166
             },
             {
                 "module" : "Network.node[5].app",
                 "name" : "hopCount",
-                "value" : 2.3183183183183
+                "value" : 2.210843373494
             },
             {
                 "module" : "Network.node[5].app",
@@ -176,7 +176,7 @@
             {
                 "module" : "Network.node[5].app",
                 "name" : "receivedPackets",
-                "value" : 333
+                "value" : 166
             },
             {
                 "module" : "Network.node[6].app",
@@ -196,7 +196,7 @@
             {
                 "module" : "Network.node[6].app",
                 "name" : "sentPackets",
-                "value" : 40
+                "value" : 23
             },
             {
                 "module" : "Network.node[6].app",
@@ -221,7 +221,7 @@
             {
                 "module" : "Network.node[7].app",
                 "name" : "sentPackets",
-                "value" : 46
+                "value" : 20
             },
             {
                 "module" : "Network.node[7].app",
@@ -990,7 +990,7 @@
             {
                 "module" : "Network.node[0].app",
                 "name" : "interArrivalTime",
-                "value" : "exponential(4)"
+                "value" : "exponential(8)"
             },
             {
                 "module" : "Network.node[0].app",
@@ -1035,7 +1035,7 @@
             {
                 "module" : "Network.node[1].app",
                 "name" : "interArrivalTime",
-                "value" : "exponential(4)"
+                "value" : "exponential(8)"
             },
             {
                 "module" : "Network.node[1].app",
@@ -1080,7 +1080,7 @@
             {
                 "module" : "Network.node[2].app",
                 "name" : "interArrivalTime",
-                "value" : "exponential(4)"
+                "value" : "exponential(8)"
             },
             {
                 "module" : "Network.node[2].app",
@@ -1125,7 +1125,7 @@
             {
                 "module" : "Network.node[3].app",
                 "name" : "interArrivalTime",
-                "value" : "exponential(4)"
+                "value" : "exponential(8)"
             },
             {
                 "module" : "Network.node[3].app",
@@ -1170,7 +1170,7 @@
             {
                 "module" : "Network.node[4].app",
                 "name" : "interArrivalTime",
-                "value" : "exponential(4)"
+                "value" : "exponential(8)"
             },
             {
                 "module" : "Network.node[4].app",
@@ -1260,7 +1260,7 @@
             {
                 "module" : "Network.node[6].app",
                 "name" : "interArrivalTime",
-                "value" : "exponential(4)"
+                "value" : "exponential(8)"
             },
             {
                 "module" : "Network.node[6].app",
@@ -1305,7 +1305,7 @@
             {
                 "module" : "Network.node[7].app",
                 "name" : "interArrivalTime",
-                "value" : "exponential(4)"
+                "value" : "exponential(8)"
             },
             {
                 "module" : "Network.node[7].app",
