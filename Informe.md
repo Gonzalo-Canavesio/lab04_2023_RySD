@@ -47,7 +47,7 @@ En la implementación dada por la catedra la capa de red elige siempre mandar el
 
 El tamaño de los paquetes en todos los casos de prueba será de 125000 bytes, la tasa de transferencia de todos los enlaces es de 1Mbps, su retardo es de 0,1ms y el tiempo de simulación será de 200 segundos.
 
-Se modificó la capa de app dada en el kickstarter para permitir la medición de estadisticas de la red, como paquetes enviados, paquetes recibidos, demora en la entrega de paquetes, cantidad de saltos, utilización de los buffers, etc. Luego de cada simulación se accede a estas estadisticas y se las utiliza para generar los gráficos y tablas que se presentan en este informe y permiten analizar el rendimiento de la red.
+Se modificó la capa de app dada en el kickstarter para permitir la medición de estadisticas de la red, como paquetes enviados, paquetes recibidos, demora en la entrega de paquetes, cantidad de saltos, utilización de los buffers, etc. Luego de cada simulación se accede a estas estadisticas y se las utiliza para generar los gráficos y tablas que se presentan en este informe y permiten analizar el rendimiento de la red y compara los distintos casos
 
 También se tuvo que modificar la estructura del paquete para integrar un campo con la cantidad de saltos que el paquete lleva realizados.
 
@@ -79,9 +79,9 @@ Como primer punto podemos observar que se recibieron en el nodo 5 más o menos l
 
 Al tener un cuello de botella y un crecimiento lineal del tamaño del buffer debido a que ambos nodos comparten una parte de su recorrido hasta el nodo 5, se genera un crecimiento lineal de la demora en recibir un paquete, como se puede ver en el gráfico de demora en recibir un paquete. Si se eligiera la ruta óptima para enviar los paquetes, la demora sería constante y mucho menor ya que los paquetes del nodo 0 y 2 utilizarían rutas distintas y no se acumularían en el mismo buffer.
 
-Centrandonos un poco más en el cuello de botella, este surge porque el nodo 0 genera paquetes que estan listos para ser enviado y los cuales deben salir por la misma ruta para enviar los paquetes desde el nodo 2. A causa de lo anterior, el enlace que conecta el nodo 0 con el nodo 1 no maneje esta ola de paquetes proveniente del nodo 0, y esto provoca que se acumulen en el buffer. 
+Centrandonos un poco más en el cuello de botella, este surge porque el nodo 0 genera paquetes que estan listos para ser enviado y los cuales deben salir por el mismo enlace que se utiliza para enviar los paquetes provenientes del nodo 2. A causa de lo anterior, el enlace que conecta el nodo 0 con el nodo 1 no maneja esta ola de paquetes proveniente del nodo 0, y esto provoca que se acumulen en el buffer. 
 
-El nodo 2 también ve un crecimiento en el tamaño de su buffer en algunos momentos de la simulación, pero es debido a la aleatoriedad de la generación de paquetes, ya que luego del pico de crecimiento el buffer baja nuevamente a valores aceptables.○
+El nodo 2 también ve un crecimiento en el tamaño de su buffer en algunos momentos de la simulación, pero es debido a la aleatoriedad de la generación de paquetes, ya que luego del pico de crecimiento el buffer baja nuevamente a valores aceptables.
 
 #### Caso 2
 
