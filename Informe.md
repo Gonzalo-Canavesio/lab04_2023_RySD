@@ -196,7 +196,7 @@ En el caso de los buffers los únicos buffers que no presentan un comportamiento
 
 | Comparación delay promedio | Comparación cantidad de saltos promedio |
 | :-------------------------: | :-------------------------: |
-| ![Caso1Delay](imgs\comparacion_delay_caso1.png) | ![Caso1Saltos](imgs\comparacion_saltos_caso1.png) |
+| ![Caso1Delay](imgs/comparacion_delay_caso1.png) | ![Caso1Saltos](imgs/comparacion_saltos_caso1.png) |
 
 En estas dos gráficas se puede ver la comparación entre los resultados obtenidos con la estrategia de enrutamiento anterior y los resultados obtenidos con la nueva estrategia de enrutamiento en terminos de delay promedio y cantidad de saltos promedio. Se puede ver que con la nueva estrategia de enrutamiento se obtienen mejores resultados en ambos casos y que la diferencia es bastante grande sobre todo en el delay promedio, simbolizando una mejora en la eficiencia y el uso equilibrado de la red. Todo esto es gracias a que ahora cada paquete toma la ruta más corta hacia su destino.
 
