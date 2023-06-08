@@ -193,7 +193,7 @@ En este caso de prueba se envian paquetes de manera regular desde dos nodos (El 
 
 En este caso se puede ver que el uso de la red fue mucho más eficiente, casi todos los paquetes llegaron a destino y la demora promedio fue mucho menor. Esto se debe a que el algoritmo de enrutamiento que implementamos funciona correctamente y logra brindarle a cada paquete la ruta más corta hacia su destino.
 
-Como tanto el nodo 0 como el nodo 2 tienen que atravezar 2 nodo para llegar al nodo 5, la cantidad de saltos promedio es 3. Otro dato interesante para analizar es la demora en el tiempo, que tiene variaciones pero son propias de la aleatoriedad de la simulación en la generación de paquetes y no se ve una tendencia de crecimiento lineal como si se veía con la estrategia de enrutamiento anterior.
+Como tanto el nodo 0 como el nodo 2 tienen que atravezar 2 nodos intermedios hasta llegar al nodo 5, la cantidad de saltos promedio es 3. Otro dato interesante para analizar es la demora en el tiempo, que tiene variaciones pero son propias de la aleatoriedad de la simulación en la generación de paquetes y no se ve una tendencia de crecimiento lineal como si se veía con la estrategia de enrutamiento anterior.
 
 En el caso de los buffers los únicos buffers que no presentan un comportamiento constante son los de los nodos 0 y 2, que son los que envian los paquetes. Esto se debe a que los paquetes tienen un tiempo de generación aleatorio y por lo tanto puede en algunos momentos saturarse un poco el buffer, pero también tiene momentos donde se vacia y mantiene valores bajos por un tiempo. Lo importante es que aquí tampoco se ve una tendencia de crecimiento lineal como si se veía con la estrategia de enrutamiento anterior.
 
@@ -201,7 +201,7 @@ En el caso de los buffers los únicos buffers que no presentan un comportamiento
 | :-------------------------: | :-------------------------: |
 | ![Caso1Delay](imgs/comparacion_delay_caso1.png) | ![Caso1Saltos](imgs/comparacion_saltos_caso1.png) |
 
-En estas dos gráficas se puede ver la comparación entre los resultados obtenidos con la estrategia de enrutamiento anterior y los resultados obtenidos con la nueva estrategia de enrutamiento en terminos de delay promedio y cantidad de saltos promedio. Se puede ver que con la nueva estrategia de enrutamiento se obtienen mejores resultados en ambos casos y que la diferencia es bastante grande sobre todo en el delay promedio, simbolizando una mejora en la eficiencia y el uso equilibrado de la red. Todo esto es gracias a que ahora cada paquete toma la ruta más corta hacia su destino.
+En estas dos gráficas se puede ver la comparación entre los resultados obtenidos con la estrategia de enrutamiento anterior y los resultados obtenidos con la nueva estrategia de enrutamiento en terminos de delay promedio y cantidad de saltos promedio. Se puede ver que con la nueva estrategia de enrutamiento se obtienen mejores resultados en ambos casos y que la diferencia es bastante grande sobre todo en el delay promedio, obteniendo entre un 10-20% de la demora que se obtenia con la estrategia anterior y simbolizando una mejora en la eficiencia y el uso equilibrado de la red. También la cantidad de saltos que realiza un paquete en promedio se redujo en poco menos de 1 salto. Todo esto es gracias a que ahora cada paquete toma la ruta más corta hacia su destino.
 
 Algo muy importante a destacar es que no se generan loops de enrutamiento en este caso con la estrategia de enrutamiento implementada.
 
@@ -210,7 +210,7 @@ Algo muy importante a destacar es que no se generan loops de enrutamiento en est
 
 En este caso de prueba se envian paquetes de manera regular desde los 7 nodos hacia el nodo 5. Se obtuvieron los siguientes resultados con el interArrivalTime en exponential(4) segundos:
 
-Decidimos cambiar de exponential(1) a exponential(4) para poder ver mejor los resultados, ya que con exponential(1) los paquetes se generaban muy seguido y se generaba un embotellamiento en los buffers que tenia que ver con la topologia y generación de paquetes y no con la estrategia de enrutamiento.
+Decidimos cambiar de exponential(1) a exponential(4) para poder ver mejor los resultados, ya que con exponential(1) los paquetes se generaban muy seguido y se generaba un embotellamiento en los buffers que era causado por la topologia de la red y no tenia que ver con la estrategia de enrutamiento.
 
 | Paquetes enviados | Paquetes recibidos | Demora promedio | Cantidad de saltos promedio |
 | :---------------: | :----------------: | :-------------: | :-------------------------: |
@@ -239,7 +239,7 @@ Como se puede ver en el gráfico de demora en recibir un paquete, la demora es m
 | :-------------------------: | :-------------------------: |
 | ![Caso2Delay](imgs/comparacion_delay_caso2.png) | ![Caso2Saltos](imgs/comparacion_saltos_caso2.png) |
 
-En estas dos gráficas se puede ver la comparación entre los resultados obtenidos con la estrategia de enrutamiento anterior y los resultados obtenidos con la nueva estrategia de enrutamiento en terminos de delay promedio y cantidad de saltos promedio. Se puede ver que con la nueva estrategia de enrutamiento se obtienen mejores resultados en ambos casos y que la diferencia es bastante grande sobre todo en el delay promedio, simbolizando una mejora en la eficiencia y el uso equilibrado de la red. Todo esto es gracias a que ahora cada paquete toma la ruta más corta hacia su destino.
+En estas dos gráficas se puede ver la comparación entre los resultados obtenidos con la estrategia de enrutamiento anterior y los resultados obtenidos con la nueva estrategia de enrutamiento en terminos de delay promedio y cantidad de saltos promedio. Se puede ver que con la nueva estrategia de enrutamiento se obtienen mejores resultados en ambos casos y que la diferencia es bastante grande sobre todo en el delay promedio, obteniendo entre un 10-20% de la demora que se obtenia con la estrategia anterior y simbolizando una mejora en la eficiencia y el uso equilibrado de la red. También la cantidad de saltos que realiza un paquete en promedio se redujo en poco mas de 1 salto y medio. Todo esto es gracias a que ahora cada paquete toma la ruta más corta hacia su destino.
 
 Algo muy importante a destacar es que no se generan loops de enrutamiento en este caso con la estrategia de enrutamiento implementada.
 
@@ -271,9 +271,9 @@ En este caso de prueba se envian paquetes de manera regular desde los 7 nodos ha
 
 No tenemos mucho con lo que comparar debido a que el algoritmo de enrutamiento anterior no funciona en esta topología, se genera un error en la simulación. Igual es claro que el algoritmo anterior no serviría para esta topologia más complicada y habría gran cantidad de paquetes que no llegarían a destino.
 
-La cantidad de paquetes recibidos es baja en relación a la cantidad de paquetes enviados, eso se debe sobre todo a que se genera un cuello de botella en el nodo 4, todos los nodos excepto el nodo 6 lo utilizan al nodo 4 en el camino para que sus paquetes lleguen al nodo 5, por lo que el nodo 4 se satura y no puede enviar todos los paquetes que recibe. Hablamos un poco más de este problema en la próxima sección, donde se analizan mejoras posibles al algoritmo de enrutamiento.
+La cantidad de paquetes recibidos esta un poco lejos de la cantidad de paquetes enviados, eso se debe sobre todo a que se genera un cuello de botella en el nodo 4, todos los nodos excepto el nodo 6 lo utilizan al nodo 4 en el camino para que sus paquetes lleguen al nodo 5, por lo que el nodo 4 se satura y no puede enviar todos los paquetes que recibe. Hablamos un poco más de este problema en la próxima sección, donde se analizan mejoras posibles al algoritmo de enrutamiento planteado.
 
-Sin embargo, fuera de ese pequeño detalle, el algoritmo se comporta de manera satisfactoria en la red, logrando que la mayoría de los paquetes lleguen a destino, logrando que utilicen los caminos más cortos para llegar a su destino.
+Sin embargo, fuera de ese pequeño detalle, el algoritmo se comporta de manera satisfactoria en la red, logrando que la mayoría de los paquetes lleguen a destino y haciendo que los paquetes utilicen el camino más corto para llegar a su destino.
 
 ## Discusión
 
