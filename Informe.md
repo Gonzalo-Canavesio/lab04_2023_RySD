@@ -234,7 +234,7 @@ Como se puede ver en el gráfico de demora en recibir un paquete, la demora es m
 
 | Comparación delay promedio | Comparación cantidad de saltos promedio |
 | :-------------------------: | :-------------------------: |
-| ![Caso2Delay](imgs\comparacion_delay_caso2.png) | ![Caso2Saltos](imgs\comparacion_saltos_caso2.png) |
+| ![Caso2Delay](imgs/comparacion_delay_caso2.png) | ![Caso2Saltos](imgs/comparacion_saltos_caso2.png) |
 
 En estas dos gráficas se puede ver la comparación entre los resultados obtenidos con la estrategia de enrutamiento anterior y los resultados obtenidos con la nueva estrategia de enrutamiento en terminos de delay promedio y cantidad de saltos promedio. Se puede ver que con la nueva estrategia de enrutamiento se obtienen mejores resultados en ambos casos y que la diferencia es bastante grande sobre todo en el delay promedio, simbolizando una mejora en la eficiencia y el uso equilibrado de la red. Todo esto es gracias a que ahora cada paquete toma la ruta más corta hacia su destino.
 
@@ -244,7 +244,7 @@ Algo muy importante a destacar es que no se generan loops de enrutamiento en est
 
 | carga util/carga ofrecida en distintos InterArrivalTime |
 | :--------------------------------------: |
-| ![Uso](imgs\usage_comparison.png)
+| ![Uso](imgs/usage_comparison.png)
 | En el eje x se puede ver el InterArrivalTime y en el eje y se puede ver la carga util/carga ofrecida. |
 
 Como podemos observar en el gráfico, la primera estrategia de enrutamiento necesita aproximadamente el doble de InterArrivalTime para lograr la misma carga util/carga ofrecida que la nueva estrategia de enrutamiento. La estrategia que implementamos aproximadamente en un InterArrivalTime de 4 segundos logra una carga util/carga cercana a 1 y un equilibrio en la red, mientras que la estrategia anterior necesita un InterArrivalTime de aproximadamente 8 segundos para lograr una carga util/carga cercana a 1, lo que significa que la nueva estrategia de enrutamiento permite generar el doble de paquetes que la estrategia anterior sin que se sature la red y se pueda mantener el equilibrio de la misma.
@@ -256,7 +256,7 @@ Como podemos observar en el gráfico, la primera estrategia de enrutamiento nece
 
 La topología que se utilizó para este caso de prueba es la siguiente:
 
-![Topologia](Img_Infomre\topologia3.png)
+![Topologia](Img_Infomre/topologia3.png)
 
 Como vemos es mucho más compleja que la topología del anillo, ya que tiene muchos más nodos y muchos más enlaces, y no tiene una cantidad fija de enlaces por nodo. En este caso de prueba nos centraremos en ver que la red se utiliza de manera eficiente y que la mayoría de los paquetes lleguen a destino.
 
