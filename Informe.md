@@ -87,7 +87,7 @@ El nodo 2 también ve un crecimiento en el tamaño de su buffer en algunos momen
 
 En este caso de prueba se envian paquetes de manera regular desde los 7 nodos hacia el nodo 5. Se obtuvieron los siguientes resultados con el interArrivalTime en exponential(4) segundos:
 
-Decidimos cambiar de exponential(1) a exponential(4) para poder ver mejor los resultados, ya que con exponential(1) los paquetes se generaban muy seguido y se generaba un embotellamiento en los buffers que tenia que ver con la topologia y generación de paquetes y no con la estrategia de enrutamiento.
+Decidimos cambiar de exponential(1) a exponential(4) para poder ver mejor los resultados, ya que con exponential(1) los paquetes se generaban muy seguido y se generaba un embotellamiento en los buffers que era causado por la topologia de la red y no tenia que ver con la estrategia de enrutamiento.
 
 | Paquetes enviados | Paquetes recibidos | Demora promedio | Cantidad de saltos promedio |
 | :---------------: | :----------------: | :-------------: | :-------------------------: |
@@ -110,7 +110,7 @@ Decidimos cambiar de exponential(1) a exponential(4) para poder ver mejor los re
 
 Como podemos ver en los gráficos y la tabla de datos, en este caso también tenemos que llegaron a destino aproximadamente la mitad de los paquetes enviados. En este caso también sucede porque en la configuración proporcionada no se elige la ruta óptima para enviar los paquetes, lo que desencadena que en los nodos más cercanos al nodo 5 (yendo en el sentido horario) se acumulen paquetes en los buffers. Esto se puede ver en los gráficos de utilización de los buffers, donde se puede ver que los buffers de los nodos 6, 7, 0 y 1 se llenan de manera desproporcionada con respecto a los demás nodos y nunca se vacian durante el tiempo de simulación, presentan un crecimiento lineal en su tamaño.
 
-Al igual que en el caso anterior, el cuello de botella se genera porque los nodos generan paquetes que deben pasar por el mismo enlace que se utiliza para enviar paquetes de los vecinos hacie el nodo 5, y este enlace no es capaz de manejar la cantidad de paquetes que quieren utilizarlo. Esto se puede ver en el gráfico de demora en enviar un paquete, donde se puede ver que la demora crece de manera lineal a medida que pasa el tiempo, acompañando el crecimiento en el tamaño de los buffers. Los picos descendentes en la demora se deben a paquetes de nodos cercanos al nodo 5 que estuvieron esperando en los buffers de menos cantidad de nodos y que llegaron "rapidamente" a su destino, a comparación de los paquetes más lejanos al nodo 5 que tuvieron que esperar en cada uno de los buffers saturados que se encontraron en su camino (Por ejemplo, paquetes del nodo 4 tuvieron que pasar por los buffers de los nodos 3,2,1,0,7,6 antes de llegar a su destino, y varios de esos se vieron saturados durante la simulación).
+Al igual que en el caso anterior, el cuello de botella se genera porque los nodos generan paquetes que deben pasar por el mismo enlace que se utiliza para enviar paquetes de los vecinos hacie el nodo 5, y este enlace no es capaz de manejar la cantidad de paquetes que quieren utilizarlo. Esto se puede ver en el gráfico de demora en enviar un paquete, donde se puede ver que la demora crece de manera lineal a medida que pasa el tiempo, acompañando el crecimiento en el tamaño de los buffers. Los picos descendentes en la demora se deben a paquetes de nodos cercanos al nodo 5 que pasaron por los buffers de menos cantidad de nodos y que llegaron "rapidamente" a su destino, a comparación de los paquetes más lejanos al nodo 5 que tuvieron que esperar en cada uno de los buffers saturados que se encontraron en su camino (Por ejemplo, paquetes del nodo 4 tuvieron que pasar por los buffers de los nodos 3,2,1,0,7,6 antes de llegar a su destino, y varios de esos se vieron saturados durante la simulación, por lo que tendría sentido que los paquetes del nodo 4 sean los que más demora presenten).
 
 
 #### Conclusiones
@@ -129,7 +129,7 @@ Para resolver el problema de enrutamiento proponemos un algoritmo que llamamos *
 6. Se rellena una tabla de enrutamiento con la información obtenida en el paso anterior.
 7. Cuando un nodo recibe un paquete de datos, lo envia por la interfaz que corresponda según la tabla de enrutamiento.
 
-Elegimos BFS frente a Dijkstra debido a que BFS permite computar distancias minimas en grafos no ponderados/con solo peso 1, y la topologia de la red se representa como un grafo donde todos caminos son de peso 1. Además la complejidad de Djkstra es O(n^2) y la de BFS es O(n+m) donde n es la cantidad de nodos y m la cantidad de aristas, dando que en grafos no densos (Como la topologia que presentan la mayoria de las redes) BFS es más eficiente. 
+Elegimos BFS frente a Dijkstra debido a que BFS permite computar distancias minimas en grafos no ponderados/con solo peso 1, y nosotrs decidimos representar la topologia de la red como un grafo donde todos caminos son de peso 1. Además la complejidad de Djkstra es O(n^2) y la de BFS es O(n+m) donde n es la cantidad de nodos y m la cantidad de aristas, dando como resultado que en grafos no densos (Como la topologia que presentan la mayoria de las redes) BFS es más eficiente. 
 
 ### Implementación
 
@@ -138,6 +138,7 @@ Para poder implementar el algoritmo propuesto se tuvo que modificar la capa de r
 En la estructura del paquete se agregó un campo que contiene una lista/vector de nodos. Este campo se utiliza para guardar la lista de vecinos de cada nodo en los paquetes de tipo "Info" que se envian durante el proceso de inicialización de la red.
 
 En la capa de red hubo mushisimos cambios. Se agregaron los siguientes campos:
+
 - `routingTable`: Una tabla/map de enrutamiento que contiene la información de que interfaz utilizar para llegar a cada nodo de la red.
 - `graph`: Una estructura que representa el grafo de la red. Se utiliza para calcular el camino mas corto hacia todos los nodos de la red.
 - `infoReceived`: Un map que se utiliza para saber cuando se recibió el paquete "Info" de todos los nodos de la red.
@@ -147,6 +148,7 @@ En la capa de red hubo mushisimos cambios. Se agregaron los siguientes campos:
 - `neighbors`: Un map que vincula el id de un nodo con su interfaz correspondiente. Se utiliza para saber que interfaz utilizar para enviar un paquete a un nodo vecino.
 
 Se vincularon los siguientes "tipos" de paquetes al `Kind` del paquete:
+
 - `Hello`: Kind 3
 - `HelloAck`: Kind 4
 - `Info`: Kind 5
@@ -154,6 +156,7 @@ Se vincularon los siguientes "tipos" de paquetes al `Kind` del paquete:
 El nuevo proceso de inicialización inicializa las variables necesarias y envia un paquete "Hello" por todas las interfaces validas.
 
 Luego, las modificaciones en el metodo `handleMessage` son las siguientes:
+
 - Si se recibe un paquete de tipo Hello se envia un paquete de tipo HelloAck por la interfaz correspondiente.
 - Si se recibe un paquete de tipo HelloAck se guarda la información de que el nodo que envio el paquete es un vecino en el map `neighbors` y en el grafo, además de incrementar el contador `numNeighborsKnown` y establecer `infoReceived` en false para el nodo que envio el paquete.
   - Si `numNeighborsKnown` es igual a `numInterfaces` se envia un paquete "Info" con la lista de vecinos del nodo por todas las interfaces validas.
