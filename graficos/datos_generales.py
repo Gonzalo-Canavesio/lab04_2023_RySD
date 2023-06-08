@@ -17,9 +17,9 @@ def get_general_data(source):
 def main():
     sources = [
         "p1c1.json",
-        "p1c2_IAT8.json",
+        "p1c2_IAT4.json",
         "p2c1.json",
-        "p2c2_IAT8.json",
+        "p2c2_IAT4.json",
     ]
     for source in sources:
         get_general_data(source)

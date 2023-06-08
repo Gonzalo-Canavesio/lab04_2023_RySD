@@ -53,40 +53,69 @@ También se tuvo que modificar la estructura del paquete para integrar un campo 
 
 #### Caso 1
 
-En el primer caso de prueba, hay dos nodos fuente, Nodo 0 y Nodo 2, y un nodo receptor, Nodo 5. Si nos fijamos en la estructura de la red, podemos notar que la mejor ruta que puede tomar el Nodo 0 es en sentido de las agujas del reloj, mientras que para el Nodo 2 es en sentido contrario a las agujas del reloj.
+En este caso de prueba se envian paquetes de manera regular desde dos nodos (El nodo 0 y el nodo 2) hacia un mismo nodo (El nodo 5). Se obtuvieron los siguientes resultados con el interArrivalTime en exponential(1) segundos:
 
-|Demora| Buffer                                 |
-|------|----------------------------------------|
-|![Caso1Demora](imgs/p1c1-delay.png)| ![Caso1Buffer](imgs/p1c1-buffers-.png) |
+| Paquetes enviados | Paquetes recibidos | Demora promedio | Cantidad de saltos promedio |
+| :---------------: | :----------------: | :-------------: | :-------------------------: |
+|        390        |         196        |     51.159      |             3.918             |
 
-Como primer punto podemos observar que la demora en con esta estructura cada vez es mayor. Inicialmente, esto ocurre porque en la configuración proporcionada no se elige la ruta óptima para enviar los paquetes desde el Nodo 2 hasta el Nodo 5. Además, se produce un problema adicional en un tramo de la ruta, donde se envían paquetes tanto desde el Nodo 0 como desde el Nodo 2, lo que genera un mayor retraso debido a que se supera la capacidad de esos enlaces para manejar tantos paquetes.
+| Demora en recibir un paquete | 
+| :-------------------------: | 
+| ![Caso1Demora](imgs/p1c1-delay.png) | 
+| En el eje x se puede ver el tiempo de la simulación en segundos y en el eje y se puede ver la demora en recibir un paquete en segundos.|
 
-Para los buffer, se puede ver que se genera un fenomeno por causa de esto. El nodo 0 genera paquetes que estan listos para ser enviado pero, tambien se usa la misma ruta para enviar nodos desde el nodo 2. A causa de lo anterior, el enlace que conecta el nodo 0 con el nodo 1 no maneje esta ola de paquetes proveniente del nodo 0, y esto provoca que se acumulen en el buffer del nodo 0 
+|Utilización de los buffers (todos) | 
+|:------------------------------------: |
+|![Caso1Buffers1](imgs/p1c1-buffers1.png) |
+| En el eje x se puede ver el tiempo de la simulación en segundos y en el eje y se puede ver la cantidad de paquetes en el buffer.|○
 
-[INSERTAR RESULTADOS Y ANALISIS, CHAMUYO O COMPARACION DE ESOS RESULTADOS]
 
+| Utilización de los buffers (individual) |
+| :---------------------------------: |
+| ![Caso1Buffers2](imgs/p1c1-buffers2.png) |
+| En el eje x se puede ver el tiempo de la simulación en segundos y en el eje y se puede ver la cantidad de paquetes en el buffer para cada buffer |
+
+Como primer punto podemos observar que se recibieron en el nodo 5 más o menos la mitad de los paquetes enviados desde los nodos 0 y 2. Esto sucede porque en la configuración proporcionada no se elige la ruta óptima para enviar los paquetes desde el Nodo 2 hasta el Nodo 5. Entonces se genera un cuello de botella en el enlace que conecta el nodo 0 con el nodo 1 y los paquetes se acumulan en ese buffer, como podemos ver en los gráficos de la utilización de los buffers. Todos los demás buffers se mantienen en valores aceptables.
+
+Al tener un cuello de botella y un crecimiento lineal del tamaño del buffer debido a que ambos nodos comparten una parte de su recorrido hasta el nodo 5, se genera un crecimiento lineal de la demora en recibir un paquete, como se puede ver en el gráfico de demora en recibir un paquete. Si se eligiera la ruta óptima para enviar los paquetes, la demora sería constante y mucho menor ya que los paquetes del nodo 0 y 2 utilizarían rutas distintas y no se acumularían en el mismo buffer.
+
+Centrandonos un poco más en el cuello de botella, este surge porque el nodo 0 genera paquetes que estan listos para ser enviado y los cuales deben salir por la misma ruta para enviar los paquetes desde el nodo 2. A causa de lo anterior, el enlace que conecta el nodo 0 con el nodo 1 no maneje esta ola de paquetes proveniente del nodo 0, y esto provoca que se acumulen en el buffer. 
+
+El nodo 2 también ve un crecimiento en el tamaño de su buffer en algunos momentos de la simulación, pero es debido a la aleatoriedad de la generación de paquetes, ya que luego del pico de crecimiento el buffer baja nuevamente a valores aceptables.○
 
 #### Caso 2
 
-En esta configuración, el Nodo 5 permanecerá como el único receptor en la red, mientras que todos los demás nodos actuarán como emisores.
+En este caso de prueba se envian paquetes de manera regular desde los 7 nodos hacia el nodo 5. Se obtuvieron los siguientes resultados con el interArrivalTime en exponential(4) segundos:
 
-| Demora                                             |
-|----------------------------------------------------|
-| ![Caso2Demora](imgs/p1c2-delay.png)                |
+Decidimos cambiar de exponential(1) a exponential(4) para poder ver mejor los resultados, ya que con exponential(1) los paquetes se generaban muy seguido y se generaba un embotellamiento en los buffers que tenia que ver con la topologia y generación de paquetes y no con la estrategia de enrutamiento.
 
-| Buffer                                             |
-|----------------------------------------------------|
-| ![Caso2buffer01](imgs/p1c2-all_buffers.png)        |
-| ![Caso2buffer02](imgs/p1c2-buffers_first_half.png) |
-| ![Caso2buffer03](imgs/p1c2-buffers_second_half.png)|
+| Paquetes enviados | Paquetes recibidos | Demora promedio | Cantidad de saltos promedio |
+| :---------------: | :----------------: | :-------------: | :-------------------------: |
+|        344        |         195        |     41.349      |             3.866             |
 
+| Demora en recibir un paquete |
+| :-------------------------: |
+| ![Caso2Demora](imgs/p1c2-delay.png) |
+| En el eje x se puede ver el tiempo de la simulación en segundos y en el eje y se puede ver la demora en recibir un paquete en segundos. |
 
-[INSERTAR RESULTADOS Y ANALISIS, CHAMUYO O COMPARACION DE ESOS RESULTADOS]
+| Utilización de los buffers (todos) |
+| :--------------------------------------: |
+| ![Caso2Buffers1](imgs/p1c2-buffers1.png)
+| En el eje x se puede ver el tiempo de la simulación en segundos y en el eje y se puede ver la cantidad de paquetes en el buffer. |
+
+| Utilización de los buffers (individual) |
+| :---------------------------------: |
+| ![Caso2Buffers2](imgs/p1c2-buffers2.png) |
+| En el eje x se puede ver el tiempo de la simulación en segundos y en el eje y se puede ver la cantidad de paquetes en el buffer para cada buffer |
+
+Como podemos ver en los gráficos y la tabla de datos, en este caso también tenemos que llegaron a destino aproximadamente la mitad de los paquetes enviados. En este caso también sucede porque en la configuración proporcionada no se elige la ruta óptima para enviar los paquetes, lo que desencadena que en los nodos más cercanos al nodo 5 (yendo en el sentido horario) se acumulen paquetes en los buffers. Esto se puede ver en los gráficos de utilización de los buffers, donde se puede ver que los buffers de los nodos 6, 7, 0 y 1 se llenan de manera desproporcionada con respecto a los demás nodos y nunca se vacian durante el tiempo de simulación, presentan un crecimiento lineal en su tamaño.
+
+Al igual que en el caso anterior, el cuello de botella se genera porque los nodos generan paquetes que deben pasar por el mismo enlace que se utiliza para enviar paquetes de los vecinos hacie el nodo 5, y este enlace no es capaz de manejar la cantidad de paquetes que quieren utilizarlo. Esto se puede ver en el gráfico de demora en enviar un paquete, donde se puede ver que la demora crece de manera lineal a medida que pasa el tiempo, acompañando el crecimiento en el tamaño de los buffers. Los picos descendentes en la demora se deben a paquetes de nodos cercanos al nodo 5 que estuvieron esperando en los buffers de menos cantidad de nodos y que llegaron "rapidamente" a su destino, a comparación de los paquetes más lejanos al nodo 5 que tuvieron que esperar en cada uno de los buffers saturados que se encontraron en su camino (Por ejemplo, paquetes del nodo 4 tuvieron que pasar por los buffers de los nodos 3,2,1,0,7,6 antes de llegar a su destino, y varios de esos se vieron saturados durante la simulación).
 
 
 #### Conclusiones
 
-El algoritmo utilizado es muy básico y no aprovecha eficientemente la estructura de la red. En lugar de utilizar ambas direcciones de la red, solo utiliza una de ellas, lo que desperdicia recursos y capacidad de transmisión. Además, en muchas ocasiones, el algoritmo elige la ruta más larga posible para llegar a un nodo, en lugar de optar por una ruta más corta y directa.
+El algoritmo utilizado es muy básico y no aprovecha eficientemente la estructura de la red. En lugar de utilizar ambas "direcciones/opciones" que brinda la red en topologia anillo, solo utiliza una de ellas, lo que desperdicia recursos y capacidad de transmisión. Además, en muchas ocasiones, el algoritmo elige la ruta más larga posible para llegar a un nodo, en lugar de optar por una ruta más corta y directa.
 
 ## Métodos
 
@@ -138,27 +167,115 @@ Finalmente, si se recibe un paquete de tipo Data y `ready` es true, se envia el 
 
 ### Caso 1
 
-[INSERTAR RESULTADOS Y ANALISIS, CHAMUYO O COMPARACION DE ESOS RESULTADOS]
+En este caso de prueba se envian paquetes de manera regular desde dos nodos (El nodo 0 y el nodo 2) hacia un mismo nodo (El nodo 5). Se obtuvieron los siguientes resultados con el interArrivalTime en exponential(1) segundos:
 
+| Paquetes enviados | Paquetes recibidos | Demora promedio | Cantidad de saltos promedio |
+| :---------------: | :----------------: | :-------------: | :-------------------------: |
+| 390 | 379 | 6.904 | 3.000 |
+
+| Demora en recibir un paquete |
+| :-------------------------: |
+| ![Caso1Demora](imgs/p2c1-delay.png) |
+| En el eje x se puede ver el tiempo de la simulación en segundos y en el eje y se puede ver la demora en recibir un paquete en segundos. |
+
+| Utilización de los buffers (todos) |
+| :--------------------------------------: |
+| ![Caso1Buffers1](imgs/p2c1-buffers1.png)
+| En el eje x se puede ver el tiempo de la simulación en segundos y en el eje y se puede ver la cantidad de paquetes en el buffer. |
+
+| Utilización de los buffers (individual) |
+| :---------------------------------: |
+| ![Caso1Buffers2](imgs/p2c1-buffers2.png) |
+| En el eje x se puede ver el tiempo de la simulación en segundos y en el eje y se puede ver la cantidad de paquetes en el buffer para cada buffer |
+
+En este caso se puede ver que el uso de la red fue mucho más eficiente, casi todos los paquetes llegaron a destino y la demora promedio fue mucho menor. Esto se debe a que el algoritmo de enrutamiento que implementamos funciona correctamente y logra brindarle a cada paquete la ruta más corta hacia su destino.
+
+Como tanto el nodo 0 como el nodo 2 tienen que atravezar 2 nodo para llegar al nodo 5, la cantidad de saltos promedio es 3. Otro dato interesante para analizar es la demora en el tiempo, que tiene variaciones pero son propias de la aleatoriedad de la simulación en la generación de paquetes y no se ve una tendencia de crecimiento lineal como si se veía con la estrategia de enrutamiento anterior.
+
+En el caso de los buffers los únicos buffers que no presentan un comportamiento constante son los de los nodos 0 y 2, que son los que envian los paquetes. Esto se debe a que los paquetes tienen un tiempo de generación aleatorio y por lo tanto puede en algunos momentos saturarse un poco el buffer, pero también tiene momentos donde se vacia y mantiene valores bajos por un tiempo. Lo importante es que aquí tampoco se ve una tendencia de crecimiento lineal como si se veía con la estrategia de enrutamiento anterior.
+
+| Comparación delay promedio | Comparación cantidad de saltos promedio |
+| :-------------------------: | :-------------------------: |
+| ![Caso1Delay](imgs\comparacion_delay_caso1.png) | ![Caso1Saltos](imgs\comparacion_saltos_caso1.png) |
+
+En estas dos gráficas se puede ver la comparación entre los resultados obtenidos con la estrategia de enrutamiento anterior y los resultados obtenidos con la nueva estrategia de enrutamiento en terminos de delay promedio y cantidad de saltos promedio. Se puede ver que con la nueva estrategia de enrutamiento se obtienen mejores resultados en ambos casos y que la diferencia es bastante grande sobre todo en el delay promedio, simbolizando una mejora en la eficiencia y el uso equilibrado de la red. Todo esto es gracias a que ahora cada paquete toma la ruta más corta hacia su destino.
 
 ### Caso 2
 
-[INSERTAR RESULTADOS Y ANALISIS, CHAMUYO O COMPARACION DE ESOS RESULTADOS]
+En este caso de prueba se envian paquetes de manera regular desde los 7 nodos hacia el nodo 5. Se obtuvieron los siguientes resultados con el interArrivalTime en exponential(4) segundos:
 
-### Caso 3 - Netowrk Star (Punto estrella)
+Decidimos cambiar de exponential(1) a exponential(4) para poder ver mejor los resultados, ya que con exponential(1) los paquetes se generaban muy seguido y se generaba un embotellamiento en los buffers que tenia que ver con la topologia y generación de paquetes y no con la estrategia de enrutamiento.
 
-[INSERTAR RESULTADOS Y ANALISIS, CHAMUYO O COMPARACION DE ESOS RESULTADOS]
+| Paquetes enviados | Paquetes recibidos | Demora promedio | Cantidad de saltos promedio |
+| :---------------: | :----------------: | :-------------: | :-------------------------: |
+| 344 | 333 | 4.694 |2.318 |
+
+| Demora en recibir un paquete |
+| :-------------------------: |
+| ![Caso2Demora](imgs/p2c2-delay.png) |
+| En el eje x se puede ver el tiempo de la simulación en segundos y en el eje y se puede ver la demora en recibir un paquete en segundos. |
+
+| Utilización de los buffers (todos) |
+| :--------------------------------------: |
+| ![Caso2Buffers1](imgs/p2c2-buffers1.png)
+| En el eje x se puede ver el tiempo de la simulación en segundos y en el eje y se puede ver la cantidad de paquetes en el buffer. |
+
+| Utilización de los buffers (individual) |
+| :---------------------------------: |
+| ![Caso2Buffers2](imgs/p2c2-buffers2.png) |
+| En el eje x se puede ver el tiempo de la simulación en segundos y en el eje y se puede ver la cantidad de paquetes en el buffer para cada buffer |
+
+Nuevamente podemos notar a partir de los gráficos y tablas que se hizo un mejor uso de la red, logrando que casi todos los paquetes lleguen a destino. La demora promedio también fue mucho menor que en el caso anterior, lo que se debe a que la estrategia de enrutamiento funciona correctamente y logra brindarle a cada paquete la ruta más corta hacia su destino.
+
+Como se puede ver en el gráfico de demora en recibir un paquete, la demora es mucho menor que en el caso anterior y no se ve una tendencia de crecimiento lineal como si se veía con la estrategia de enrutamiento anterior. Los buffers se llenan un poco en algunos momentos de la simulación, sobre todo los buffers más cercanos al nodo 5, pero esto se debe a que los paquetes tienen un tiempo de generación aleatorio y por lo tanto puede en algunos momentos saturarse un poco el buffer, pero también tiene momentos donde se vacia y mantiene valores bajos por un tiempo. Lo importante es que aquí tampoco se ve una tendencia de crecimiento lineal como si se veía con la estrategia de enrutamiento anterior.
+
+| Comparación delay promedio | Comparación cantidad de saltos promedio |
+| :-------------------------: | :-------------------------: |
+| ![Caso2Delay](imgs\comparacion_delay_caso2.png) | ![Caso2Saltos](imgs\comparacion_saltos_caso2.png) |
+
+En estas dos gráficas se puede ver la comparación entre los resultados obtenidos con la estrategia de enrutamiento anterior y los resultados obtenidos con la nueva estrategia de enrutamiento en terminos de delay promedio y cantidad de saltos promedio. Se puede ver que con la nueva estrategia de enrutamiento se obtienen mejores resultados en ambos casos y que la diferencia es bastante grande sobre todo en el delay promedio, simbolizando una mejora en la eficiencia y el uso equilibrado de la red. Todo esto es gracias a que ahora cada paquete toma la ruta más corta hacia su destino.
+
+| carga util/carga ofrecida en distintos InterArrivalTime |
+| :--------------------------------------: |
+| ![Uso](imgs\usage_comparison.png)
+| En el eje x se puede ver el InterArrivalTime y en el eje y se puede ver la carga util/carga ofrecida. |
+
+Como podemos observar en el gráfico, la primera estrategia de enrutamiento necesita aproximadamente el doble de InterArrivalTime para lograr la misma carga util/carga ofrecida que la nueva estrategia de enrutamiento. La estrategia que implementamos aproximadamente en un InterArrivalTime de 4 segundos logra una carga util/carga cercana a 1, mientras que la estrategia anterior necesita un InterArrivalTime de aproximadamente 8 segundos para lograr una carga util/carga cercana a 1, lo que significa que la nueva estrategia de enrutamiento permite generar el doble de paquetes que la estrategia anterior sin que se sature la red.
+
+Algo muy importante a destacar es que no se generan loops de enrutamiento en la estrategia de enrutamiento implementada.
+
+### Caso 3 - Network Star (Punto estrella)
+
+#### Topologia
+
+La topología que se utilizó para este caso de prueba es la siguiente:
+
+![Topologia](Img_Infomre\topologia3.png)
+
+Como vemos es mucho más compleja que la topología del anillo, ya que tiene muchos más nodos y muchos más enlaces, y no tiene una cantidad fija de enlaces por nodo. En este caso de prueba nos centraremos en ver que la red se utiliza de manera eficiente y que la mayoría de los paquetes lleguen a destino.
+
+En este caso de prueba se envian paquetes de manera regular desde los 7 nodos hacia el nodo 5 como en el caso 2. Se obtuvieron los siguientes resultados con el interArrivalTime en exponential(4) segundos:
+
+| Paquetes enviados | Paquetes recibidos | Demora promedio | Cantidad de saltos promedio |
+| :---------------: | :----------------: | :-------------: | :-------------------------: |
+| 344 | 235 | 29.819 | 1.936 |
+
+No tenemos mucho con lo que comparar debido a que el algoritmo de enrutamiento anterior no funciona en esta topología, se genera un error en la simulación. Igual es claro que el algoritmo anterior no serviría para esta topologia más complicada y habría gran cantidad de paquetes que no llegarían a destino.
+
+La cantidad de paquetes recibidos es baja en relación a la cantidad de paquetes enviados, eso se debe sobre todo a que se genera un cuello de botella en el nodo 4, todos los nodos excepto el nodo 6 lo utilizan al nodo 4 en el camino para que sus paquetes lleguen al nodo 5, por lo que el nodo 4 se satura y no puede enviar todos los paquetes que recibe. Hablamos un poco más de este problema en la próxima sección, donde se analizan mejoras posibles al algoritmo de enrutamiento.
+
+Sin embargo, fuera de ese pequeño detalle, el algoritmo se comporta de manera satisfactoria en la red, logrando que la mayoría de los paquetes lleguen a destino, logrando que utilicen los caminos más cortos para llegar a su destino.
 
 ## Discusión
 
-Con esto pudimos entender el funcionamiento de una red, como lograr un enrutamiento y control de la misma. Ademas de como resolver problemas sobre el tema y buscar una solucion efectiva para la misma.  
+El algoritmo implementado funciona correctamente tanto en redes con topologia anillo como en redes más complejas como la topologia del punto estrella. En ambos casos se logra un uso eficiente de la red y se logra que la mayoría de los paquetes lleguen a destino. Sin embargo, un problema importante que no contempla el algoritmo es que si se cae un nodo de la red, el algoritmo no lo detecta y sigue enviando paquetes a ese nodo, lo que genera que los paquetes se pierdan. Esto se debe a que el algoritmo solo se ejecuta al inicializar la red y mantiene la misma configuración en las tablas de enrutamiento de cada nodo durante toda la simulación. Para solucionar este problema se podría implementar un algoritmo que detecte cuando un nodo se cae y que vuelva a ejecutar el algoritmo de enrutamiento para que los paquetes tomen una ruta diferente y no se pierdan. Otra posible solución sería que el algoritmo de enrutamiento se ejecute cada cierto tiempo para que los paquetes tomen rutas diferentes y no se pierdan. Sin embargo, esto podría generar un problema de eficiencia en la red, ya que si se ejecuta el algoritmo de enrutamiento muy seguido se inundaría la red de paquetes de control/información y se perdería eficiencia. 
 
-El algoritmo que implementamos aprovecha mas la estructura dela red de anillo, haciendo que cada nodo tenga un conocimiento acerca de sus vecinos evaluando la forma mas corta, concreta y simple de poder enviar un paquete hacia el nodo destino, favoreciento el rendimiendo de la misma estructura.
+Otro problema que tiene la estrategia de enrutamiento planteada es que el "costo" de cada enlace es siempre 1, sin importar la distancia entre nodos o que tan congestionado esté el enlace. Esto puede generar que se saturen algunos enlaces y que otros enlaces no se usen, lo que no es eficiente. Para solucionar este problema se podría implementar un algoritmo que calcule el costo de cada enlace en base a la distancia entre nodos y a la cantidad de paquetes que se están enviando por ese enlace. De esta manera se podría lograr un uso más eficiente de la red.
 
-Para llegar a una funcianamiento correcto de nuestro algortimo tuvimos que vernos "obligados" a la realizacion de una gran cantidad de iteraciones y sobre todo de correcciones. Ademas encontramos que fue un desafío determinar qué interfaces (link) del nodo estaban conectadas con el exterior y cuáles no. Nos llevó mucho tiempo y esfuerzo realizar una búsqueda exhaustiva y probar diversas configuraciones hasta encontrar la solución que funcionaba correctamente.
+Para llegar al funcianamiento correcto de nuestro algortimo de enrutamiento tuvimos que realizar una gran cantidad de iteraciones y correcciones sobre la idea original. Ademas encontramos que fue un desafío determinar qué interfaces (lnk) del nodo estaban conectadas con el exterior y cuáles no para el caso estrella. Nos llevó mucho tiempo y esfuerzo y tuvimos que probar diversas configuraciones hasta encontrar una solución que funcionara correctamente y no generara problemas.
 
+Con esta actividad pudimos entender el funcionamiento de una red y como diseñar una estrategia de enrutamiento para mejorar el control y lograr un uso eficiente de la misma. Aprendimos bastante sobre el funcionamiento de las redes y estrategias de enrutamiento para poder lograr implementar nuestra propia estrategia de enrutamiento. 
 
-[Una sección con las limitaciones durante la ejecución del proyecto, problemas y posibles mejoras de los algoritmos propuestos. Ademas puede ir una mini colclusion de lo que se aprendio durante el proyecto]
 
 ## Referencias
 - Contenido audiovisual (videos/filminas) provisto por la catedra

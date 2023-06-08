@@ -93,8 +93,8 @@ def main():
         "p2c1.json",
     ]
     caso2 = [
-        "p1c2_IAT8.json",
-        "p2c2_IAT8.json",
+        "p1c2_IAT4.json",
+        "p2c2_IAT4.json",
     ]
     draw_delays(caso1)
     draw_delays(caso2)
